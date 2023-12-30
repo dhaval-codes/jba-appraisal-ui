@@ -4,8 +4,12 @@ import { Route, Routes } from "react-router-dom";
 //Loader
 import PageLoader from "../Components/Loading";
 
+//TestPage
+import TestPage from "../Pages/TestPage";
+
 // navigation pages
 import LoginPage from "../Pages/LoginPage";
+import LandingPage from "../Pages/LandingPage";
 
 const navMenu = [
     {
@@ -17,6 +21,30 @@ const navMenu = [
                 <PageLoader/>
             }>
                 <LoginPage/>
+            </Suspense>
+        )
+    },
+    {
+        label: 'Landing Page',
+        path: '/Staff',
+        element: (
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <LandingPage/>
+            </Suspense>
+        )
+    },
+    {
+        label: 'Test Page',
+        path: '/TestPage',
+        element: (
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <TestPage/>
             </Suspense>
         )
     }
