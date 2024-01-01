@@ -5,7 +5,7 @@ import FormButton from '../../Components/FormButton'
 export default function TestPage() {
   return (
     <MainWrpr>
-        <FormButton bg={'selected'}/>
+        <FormButton clicked={''} status={'Students'}/>
     </MainWrpr>
   )
 }
