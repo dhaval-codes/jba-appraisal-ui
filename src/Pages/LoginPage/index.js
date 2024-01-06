@@ -3,6 +3,7 @@ import { Container, FormLabel, InputBox, LoginDiv, MainWrpr, PopUp, PopUpWrpr, S
 import BackgroundImage from '../../Assets/Images/PNGs/background.png'
 import { ReactComponent as Logo } from '../../Assets/Images/SVGs/login-logo.svg'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const MapingArray = [
   {
@@ -25,28 +26,34 @@ export default function LoginPage() {
 
   const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
+  const navigate = useNavigate();
+
   const SubmitFunc =  async () => {
     let InputToCheck = document.getElementsByClassName('regex')[0];
-    let PasswordToCheck = document.getElementsByClassName('non-regex')[0];
-    const regex = /^\d{2,4}$/;    
+    let PasswordToCheck = document.getElementsByClassName('non-regex')[0];  
       try{
-        if (regex.test(InputToCheck.value)){
         const response = await axios.post(`${REACT_APP_API_BASE_URL}loginUser`, {
           staffCode: parseInt(InputToCheck.value),
           password: PasswordToCheck.value
         }) 
-        console.log(response.data)
-      }}
-      catch (error) {
-        console.log(error)
-        setErrorVar(true);
-        setTimeout(()=> {
-          setErrorVar(false)
-        }, 2000);
-        InputToCheck.value='';
+        if(response.data[0] !== undefined){
+          window.sessionStorage.setItem("name", response.data[0].name); 
+          console.log(window.sessionStorage.getItem('name'))
+          navigate("/Staff")
+        } else {
+          setErrorVar(true);
+          setTimeout(()=> {
+            setErrorVar(false)
+          }, 2000);
+          InputToCheck.value='';
+          PasswordToCheck.value='';
+        }
       }
-  }
-  
+      catch (error) {
+        console.log(error);
+      }
+  } 
+
   return (
     <MainWrpr bg={BackgroundImage}>
       <LoginDiv>
@@ -67,7 +74,7 @@ export default function LoginPage() {
       {errorVar &&(
       <PopUpWrpr>
         <PopUp>
-          <Warning>Employee ID entered is wrong</Warning>
+          <Warning>Employee ID or <br/> Password entered is wrong</Warning>
         </PopUp>
       </PopUpWrpr>
       )}

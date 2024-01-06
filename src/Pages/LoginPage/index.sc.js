@@ -80,6 +80,7 @@ export const Warning = styled.span`
     font-weight: 600;
     color: red;
     position: absolute;
+    text-align: center;
 `;
 
 export const PopUpWrpr = styled.div`
