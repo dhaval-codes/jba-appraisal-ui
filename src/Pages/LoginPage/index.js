@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Container, FormLabel, InputBox, LoginDiv, MainWrpr, PopUp, PopUpWrpr, SubmitButton, Trouble, Warning } from './index.sc'
 import BackgroundImage from '../../Assets/Images/PNGs/background.png'
 import { ReactComponent as Logo } from '../../Assets/Images/SVGs/login-logo.svg'
+import axios from 'axios'
 
 const MapingArray = [
   {
@@ -22,18 +23,28 @@ export default function LoginPage() {
 
   const [errorVar, setErrorVar] = useState(false);
 
-  const SubmitFunc = () => {
+  const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+  const SubmitFunc =  async () => {
     let InputToCheck = document.getElementsByClassName('regex')[0];
-    const regex = /^\d{2,4}$/;
-    if ( regex.test(InputToCheck.value)){
-      console.log('Login successfully')
-    } else {
-      setErrorVar(true);
-      setTimeout(()=> {
-        setErrorVar(false)
-      }, 2000);
-      InputToCheck.value='';
-    }
+    let PasswordToCheck = document.getElementsByClassName('non-regex')[0];
+    const regex = /^\d{2,4}$/;    
+      try{
+        if (regex.test(InputToCheck.value)){
+        const response = await axios.post(`${REACT_APP_API_BASE_URL}loginUser`, {
+          staffCode: parseInt(InputToCheck.value),
+          password: PasswordToCheck.value
+        }) 
+        console.log(response.data)
+      }}
+      catch (error) {
+        console.log(error)
+        setErrorVar(true);
+        setTimeout(()=> {
+          setErrorVar(false)
+        }, 2000);
+        InputToCheck.value='';
+      }
   }
   
   return (

@@ -22,7 +22,8 @@ const navMenu = [
             }>
                 <LoginPage/>
             </Suspense>
-        )
+        ),
+        roles: ["staff","HOD","Admin"]
     },
     {
         label: 'Landing Page',
@@ -34,7 +35,8 @@ const navMenu = [
             }>
                 <LandingPage/>
             </Suspense>
-        )
+        ),
+        roles: ["staff","HOD","Admin"]
     },
     {
         label: 'Test Page',
