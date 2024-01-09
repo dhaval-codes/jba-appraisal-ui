@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { Container, FormLabel, InputBox, LoginDiv, MainWrpr, PopUp, PopUpWrpr, SubmitButton, Trouble, Warning } from './index.sc'
 import BackgroundImage from '../../Assets/Images/PNGs/background.png'
 import { ReactComponent as Logo } from '../../Assets/Images/SVGs/login-logo.svg'
@@ -24,9 +24,18 @@ export default function LoginPage() {
 
   const [errorVar, setErrorVar] = useState(false);
 
+  useEffect(()=>{
+    window.sessionStorage.setItem('name', '');
+    window.sessionStorage.setItem('role', '')
+  },[])
+
   const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const navigate = useNavigate();
+
+  const enterPress = (event) => {
+    event.key === 'Enter' ? SubmitFunc() : console.log('key press counter')
+  }
 
   const SubmitFunc =  async () => {
     let InputToCheck = document.getElementsByClassName('regex')[0];
@@ -37,8 +46,9 @@ export default function LoginPage() {
           password: PasswordToCheck.value
         }) 
         if(response.data[0] !== undefined){
-          window.sessionStorage.setItem("name", response.data[0].name); 
-          console.log(window.sessionStorage.getItem('name'))
+          window.sessionStorage.setItem("name", response.data[0].name);
+          window.sessionStorage.setItem("role", response.data[0].role);
+          console.log(window.sessionStorage.getItem('role')) 
           navigate("/Staff")
         } else {
           setErrorVar(true);
@@ -59,7 +69,7 @@ export default function LoginPage() {
       <LoginDiv>
         <Logo style={{marginBottom:'2rem'}}/>
         {MapingArray.map((item)=>(
-          <Container>
+          <Container onKeyDown={enterPress}>
             <FormLabel>{item.label}</FormLabel>
             <InputBox placeholder={item.placeHolder} type={item.inputType} className={item.className}/>
           </Container>
