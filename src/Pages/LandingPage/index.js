@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import ApplicationHeader from '../../Components/Header'
 import { MainContainer, SideMenu, FormBtnCont, MainView } from './index.sc'
 import FormButton from '../../Components/FormButton'
@@ -29,14 +29,30 @@ const DemoArray = [
 ]
 
 export default function LandingPage() {
+  const [openForm, setOpenForm] = useState(false)
+  const [clicked, setClicked] = useState(new Array(DemoArray.length).fill('no'));
+
+  const openFunc = (index) => {
+    const updatedClicked = new Array(DemoArray.length).fill('no');
+    updatedClicked[index] = 'selected';
+    setClicked(updatedClicked);
+    setOpenForm(!openForm);
+  };
+  
   return (
     <>
         <ApplicationHeader/>
         <MainContainer>
             <SideMenu>
               <FormBtnCont>
-                {DemoArray.map((item)=>(
-                  <FormButton clicked={'no'} status={item.circleColor} title={item.title} percentage={item.filledPercentage}/>
+                {DemoArray.map((item, i)=>(
+                  <FormButton 
+                    key={i}
+                    onClick={() => openFunc(i)}
+                    clicked={clicked[i]}
+                    status={item.circleColor} 
+                    title={item.title} 
+                    percentage={item.filledPercentage}/>
                 ))}
               </FormBtnCont>
               <DetailsCont/>
