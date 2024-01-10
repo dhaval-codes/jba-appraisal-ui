@@ -36,3 +36,9 @@ export const MainView = styled.div`
     justify-content: center;
     padding: 0.5rem;
 `;
+
+export const Facts = styled.h3`
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+`;

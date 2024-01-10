@@ -1,9 +1,10 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import ApplicationHeader from '../../Components/Header'
-import { MainContainer, SideMenu, FormBtnCont, MainView } from './index.sc'
+import { MainContainer, SideMenu, FormBtnCont, MainView, Facts } from './index.sc'
 import FormButton from '../../Components/FormButton'
 import DetailsCont from '../../Components/DetailsComp'
 import DynamicDisplayComp from '../../Components/DynamicDisplayComponent'
+import axios from 'axios'
 
 const DemoArray = [
   {
@@ -29,8 +30,12 @@ const DemoArray = [
 ]
 
 export default function LandingPage() {
+
+  const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
   const [openForm, setOpenForm] = useState(false)
   const [clicked, setClicked] = useState(new Array(DemoArray.length).fill('no'));
+  const [factState, setFactState] = useState('')
 
   const openFunc = (index) => {
     const updatedClicked = new Array(DemoArray.length).fill('no');
@@ -38,6 +43,22 @@ export default function LandingPage() {
     setClicked(updatedClicked);
     setOpenForm(!openForm);
   };
+
+  const FactsFunction = async() =>{
+    const factNumber = Math.floor(Math.random() * 10) + 1;
+    try{
+      const response = await axios.get(`${REACT_APP_API_BASE_URL}facts?factNumber=${factNumber}`)
+      setFactState(response.data.facts)
+    }
+    catch{
+
+    }
+  }
+
+  useEffect(() => {
+    FactsFunction();
+  }, []);
+  
   
   return (
     <>
@@ -58,7 +79,10 @@ export default function LandingPage() {
               <DetailsCont/>
             </SideMenu>
             <MainView>
-              <DynamicDisplayComp/>
+              <Facts>{factState}</Facts>
+              { openForm && (
+                <DynamicDisplayComp/>
+              )}
             </MainView>
         </MainContainer>
     </>
