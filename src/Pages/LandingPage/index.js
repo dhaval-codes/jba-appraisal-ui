@@ -1,10 +1,9 @@
 import React,{useState, useEffect} from 'react'
 import ApplicationHeader from '../../Components/Header'
-import { MainContainer, SideMenu, FormBtnCont, MainView, Facts } from './index.sc'
-import FormButton from '../../Components/FormButton'
-import DetailsCont from '../../Components/DetailsComp'
+import { MainContainer, MainView, Facts } from './index.sc'
 import DynamicDisplayComp from '../../Components/DynamicDisplayComponent'
 import axios from 'axios'
+import Sidebar from '../../Components/Sidebar'
 
 const DemoArray = [
   {
@@ -34,15 +33,7 @@ export default function LandingPage() {
   const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const [openForm, setOpenForm] = useState(false)
-  const [clicked, setClicked] = useState(new Array(DemoArray.length).fill('no'));
   const [factState, setFactState] = useState('')
-
-  const openFunc = (index) => {
-    const updatedClicked = new Array(DemoArray.length).fill('no');
-    updatedClicked[index] = 'selected';
-    setClicked(updatedClicked);
-    setOpenForm(!openForm);
-  };
 
   const FactsFunction = async() =>{
     const factNumber = Math.floor(Math.random() * 10) + 1;
@@ -54,7 +45,6 @@ export default function LandingPage() {
 
     }
   }
-
   useEffect(() => {
     FactsFunction();
   }, []);
@@ -64,20 +54,7 @@ export default function LandingPage() {
     <>
         <ApplicationHeader/>
         <MainContainer>
-            <SideMenu>
-              <FormBtnCont>
-                {DemoArray.map((item, i)=>(
-                  <FormButton 
-                    key={i}
-                    onClick={() => openFunc(i)}
-                    clicked={clicked[i]}
-                    status={item.circleColor} 
-                    title={item.title} 
-                    percentage={item.filledPercentage}/>
-                ))}
-              </FormBtnCont>
-              <DetailsCont/>
-            </SideMenu>
+            <Sidebar/>
             <MainView>
               <Facts>{factState}</Facts>
               { openForm && (

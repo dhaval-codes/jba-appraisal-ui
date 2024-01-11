@@ -1,27 +1,33 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { DetailsBox, HeadingText, Circle, DescText } from './index.sc'
 import { ContainerSubDiv } from '../FormButton/index.sc'
+import axios from 'axios';
 
-const DetailsArray = [
-    {
-        color: '#10CD00',
-        text: 'For Employees to fill',
-    },
-    {
-        color: '#FAFF00',
-        text: 'For HODs to fill',
-    },
-    {
-        color: '#FF0000',
-        text: 'For Students to fill',
-    }
-]
 
 export default function DetailsCont() {
+    const [detailsArray, setDetailsArray] = useState([]);
+
+    const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+    const Role = window.sessionStorage.getItem("role");
+
+    const detailsArrayFunc = async (Role)=>{
+        try{
+            const response = await axios.get(`${REACT_APP_API_BASE_URL}sidebarColorDetails?for=${Role}`);
+            setDetailsArray(response.data[0].detailsArray)
+        } catch (e){
+            console.log(e);
+        }
+    }
+
+    useEffect(()=>{
+        detailsArrayFunc(Role);
+    },[])
+
   return (
     <DetailsBox>
         <HeadingText>Reference for the forms above</HeadingText>
-        {DetailsArray.map((item)=> (
+        {detailsArray.map((item)=> (
             <ContainerSubDiv>
                 <Circle color={item.color}/>
                 <DescText>{item.text}</DescText>

@@ -49,7 +49,6 @@ export default function LoginPage() {
           window.sessionStorage.setItem("name", response.data[0].name);
           window.sessionStorage.setItem("role", response.data[0].role);
           window.sessionStorage.setItem("department", response.data[0].department);
-          console.log(window.sessionStorage.getItem('role')) 
           navigate("/Staff")
         } else {
           setErrorVar(true);

@@ -32,7 +32,7 @@ export const StatusCircle = styled.div`
     height: 0.75rem;
     width: 0.75rem;
     border-radius: 50%;
-    background-color: ${(props)=>props.status === 'Employee' ? '#10CD00' : props.status === 'Hod' ? '#FAFF00' : props.status === 'Students' ? '#F00' : 'none'};
+    background-color: ${(props)=>props.status === 'Employee' ? '#10CD00' : props.status === 'HOD' ? '#FAFF00' : props.status === 'Students' ? '#F00' : props.status === 'Co-ordinator' ? "#00B9B9" : props.status === 'Admin' ? '#C57BFF' : 'none'};
 `;
 
 export const PercentageText = styled.h4`
