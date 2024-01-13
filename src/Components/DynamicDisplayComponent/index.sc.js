@@ -32,6 +32,8 @@ export const EmptyWrpr = styled.div`
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    overflow: scroll;
+    padding: 1rem;
 
     h1{
         font-size: 1.25rem;

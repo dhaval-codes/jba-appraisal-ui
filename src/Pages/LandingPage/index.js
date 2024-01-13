@@ -32,7 +32,7 @@ export default function LandingPage() {
 
   const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-  const [openForm, setOpenForm] = useState(false)
+  const [openForm, setOpenForm] = useState(true)
   const [factState, setFactState] = useState('')
 
   const FactsFunction = async() =>{
@@ -54,14 +54,17 @@ export default function LandingPage() {
     <>
         <ApplicationHeader/>
         <MainContainer>
-            <Sidebar/>
-            <MainView>
-              <Facts>{factState}</Facts>
-              { openForm && (
-                <DynamicDisplayComp/>
-              )}
-            </MainView>
-        </MainContainer>
+        <Sidebar />
+        <MainView>
+          {openForm ? (
+            <>
+              <DynamicDisplayComp />
+            </>
+          ) : (
+            <Facts>{factState}</Facts>
+          )}
+        </MainView>
+      </MainContainer>
     </>
   )
 }
