@@ -39,7 +39,7 @@ export const OptionsWrpr = styled.div`
 
 export const OptionsDiv = styled.div`
     height: auto;
-    width: 10rem;
+    width: calc(100%/5);
     border-radius: 0.6125rem;
     border: 2px solid #d9d9d9;
     font-size: 0.8125rem;

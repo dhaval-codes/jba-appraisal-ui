@@ -25,6 +25,7 @@ export const Heading = styled.div`
 `;
 
 export const EmptyWrpr = styled.div`
+    position: relative;
     height: calc(100% - 3rem);
     width: 100%;
     border: 0rem 0rem 0.625rem 0.625rem;
