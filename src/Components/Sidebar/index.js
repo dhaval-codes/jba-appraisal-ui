@@ -4,8 +4,9 @@ import DetailsCont from '../DetailsComp';
 import FormButton from '../FormButton';
 import axios from 'axios';
 
-export default function Sidebar() {
+export default function Sidebar({openForm}) {
     const [sideBarFormData, setSideBarFormData] = useState([])
+    const [selected, setSelected] = useState('')
 
     const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -20,6 +21,11 @@ export default function Sidebar() {
         }
     }
 
+    const formButtonClick = (i) => {
+        setSelected((prevSelected) => (prevSelected === i ? '' : i));
+        openForm()
+    }
+
     useEffect(()=>{
        SideBarFormData(Role)
     },[])
@@ -28,8 +34,14 @@ export default function Sidebar() {
     <SideMenu>
         <FormBtnCont>
             {sideBarFormData.map((item, i)=>(
-                <FormButton title={item.title} status={item.circleColor}/>
-            ))}
+                <FormButton 
+                    key={i}
+                    title={item.title} 
+                    status={item.circleColor} 
+                    clicked={selected === i ? 'selected' : ''}
+                    onClick={()=>formButtonClick(i)}/>
+                ))
+            }
         </FormBtnCont>
         <DetailsCont/>
     </SideMenu>

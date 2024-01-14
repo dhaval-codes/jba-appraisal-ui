@@ -5,34 +5,11 @@ import DynamicDisplayComp from '../../Components/DynamicDisplayComponent'
 import axios from 'axios'
 import Sidebar from '../../Components/Sidebar'
 
-const DemoArray = [
-  {
-    title: 'Appraisal Form A1',
-    circleColor: 'Employee',
-    filledPercentage: '34%'
-  },
-  {
-    title: 'Appraisal Form A2',
-    circleColor: 'Hod',
-    filledPercentage: '21%'
-  },
-  {
-    title: 'Appraisal Form B',
-    circleColor: 'Students',
-    filledPercentage: '18%'
-  },
-  {
-    title: 'Appraisal Form C',
-    circleColor: 'Employee',
-    filledPercentage: '98%'
-  }
-]
-
 export default function LandingPage() {
 
   const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-  const [openForm, setOpenForm] = useState(true)
+  const [openForm, setOpenForm] = useState(false)
   const [factState, setFactState] = useState('')
 
   const FactsFunction = async() =>{
@@ -41,29 +18,32 @@ export default function LandingPage() {
       const response = await axios.get(`${REACT_APP_API_BASE_URL}facts?factNumber=${factNumber}`)
       setFactState(response.data.facts)
     }
-    catch{
-
+    catch(e){
+      console.log(e)
     }
   }
   useEffect(() => {
     FactsFunction();
   }, []);
-  
+
+  const toggleForm = () =>{
+    setOpenForm(!openForm)
+  }
   
   return (
     <>
-        <ApplicationHeader/>
+      <ApplicationHeader/>
         <MainContainer>
-        <Sidebar />
-        <MainView>
-          {openForm ? (
-            <>
-              <DynamicDisplayComp />
-            </>
-          ) : (
-            <Facts>{factState}</Facts>
-          )}
-        </MainView>
+          <Sidebar openForm={toggleForm}/>
+            <MainView>
+              {openForm ? (
+                <>
+                  <DynamicDisplayComp openForm={toggleForm}/>
+                </>
+              ) : (
+                <Facts>{factState}</Facts>
+              )}
+            </MainView>
       </MainContainer>
     </>
   )
