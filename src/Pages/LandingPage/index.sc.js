@@ -8,6 +8,26 @@ export const MainContainer = styled.div`
     grid-template-columns: 1fr 3fr;
 `;
 
+export const Sidebar = styled.div`
+    height: 100%;
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #BCBCBC;
+`;
+
+export const FormBtnCont = styled.div`
+    min-height: 25rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+`;
+
 export const MainView = styled.div`
     width: 100%;
     height: 100%;
