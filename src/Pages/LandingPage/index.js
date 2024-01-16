@@ -13,6 +13,7 @@ export default function LandingPage() {
   const [showDynamicComp, setShowDynamicComp] = useState(false)
   const [selected, setSelected] = useState('')
   const [fact, setFact] = useState('')
+  const [data, setData] = useState()
 
   const Role = window.sessionStorage.getItem("role");
 
@@ -26,8 +27,8 @@ export default function LandingPage() {
   }
 
   const GetFact = async () =>{
-    const number = Math.floor(Math.random() * 10)
     try{
+      const number = Math.ceil(Math.random() * 10)
       const factRequest = await axios.get(`${REACT_APP_API_BASE_URL}facts?for=${number}`)
       setFact(factRequest.data.facts);
     }catch (e) {
@@ -36,10 +37,20 @@ export default function LandingPage() {
   }
 
   const formButtonClick = (i) => {
-    setSelected((prevSelected) => (prevSelected === i ? '' : i));
-    setShowDynamicComp(!showDynamicComp)
+    if (selected === i) {
+      setSelected('');
+      setShowDynamicComp(false)
+    } else {
+      setSelected(i);
+      setShowDynamicComp(true);
+    }
   }
 
+  const CrossIconFunction = () => {
+    setShowDynamicComp(false);
+    setSelected('')
+  }
+  
   useEffect(()=>{
     SideBarFormData(Role)
     GetFact()
@@ -65,7 +76,7 @@ export default function LandingPage() {
         </Sidebar>
         <MainView>
           {showDynamicComp ? (
-            <DynamicDisplayComp openForm={formButtonClick}/>
+            <DynamicDisplayComp openForm={CrossIconFunction} data={data}/>
           ) : (
             <Facts>{fact}</Facts>
           )}

@@ -6,7 +6,7 @@ import { formData } from '../../Utils/formA1dummyData'
 
 export default function DynamicDisplayComp({openForm}) {
 
-  const [formDataState, setFormDataState] = useState(formData)
+  const [formDataState, setFormDataState] = useState()
 
   const SubmitForm = ()=>{
     openForm();
@@ -24,8 +24,8 @@ export default function DynamicDisplayComp({openForm}) {
           ): (
             <>
               <h1>This form is filled by your Senior</h1>
-              <span>For further details contact support 
-                <a href='mailto:someone@exaple.com'>someone@exaple.com</a>
+              <span>For further details contact support
+                <a href='mailto:someone@exaple.com'> someone@exaple.com</a>
               </span>
             </>
           )}
