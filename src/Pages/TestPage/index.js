@@ -1,12 +1,12 @@
 import React from 'react'
 import { MainWrpr } from './index.sc'
-import FormA1type from '../../Components/formA1'
-import { formData } from '../../Utils/formA1dummyData'
+import FormCtype from '../../Components/formC'
+import { formCdata } from '../../Utils/formA1dummyData'
 
 export default function TestPage() {
   return (
     <MainWrpr>
-        <FormA1type formData={formData}/>
+     <FormCtype data={formCdata}/>
     </MainWrpr>
   )
 }

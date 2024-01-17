@@ -150,4 +150,14 @@ export const formData = [
       ]
     }
   ];
+
+
+export const formCdata = [
+  "Any 3 area of improvement as per recomendation:",
+  "Action plan for each point:",
+  "Measure of each outcome (Evidences)",
+  "Target Date",
+  "Management Suport",
+  "Remarks"
+]
   

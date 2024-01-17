@@ -14,8 +14,10 @@ export default function LandingPage() {
   const [selected, setSelected] = useState('')
   const [fact, setFact] = useState('')
   const [data, setData] = useState()
+  const [passingData, setPassingData] = useState()
 
   const Role = window.sessionStorage.getItem("role");
+  const Department = window.sessionStorage.getItem("department")
 
   const SideBarFormData = async (Role)=>{
     try{
@@ -36,6 +38,18 @@ export default function LandingPage() {
     }
   }
 
+  const GetForms = async (Department, Role) => {
+    try{
+      const response = await axios.post(`${REACT_APP_API_BASE_URL}formData`, {
+        department: Department,
+        role: Role
+      })
+      setData(response.data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   const formButtonClick = (i) => {
     if (selected === i) {
       setSelected('');
@@ -43,17 +57,20 @@ export default function LandingPage() {
     } else {
       setSelected(i);
       setShowDynamicComp(true);
+      setPassingData(data[i])
     }
   }
 
   const CrossIconFunction = () => {
     setShowDynamicComp(false);
-    setSelected('')
+    setSelected('');
+    setPassingData();
   }
-  
+
   useEffect(()=>{
-    SideBarFormData(Role)
-    GetFact()
+    SideBarFormData(Role);
+    GetForms(Department, Role);
+    GetFact();
   },[])
   
   return (
@@ -76,7 +93,8 @@ export default function LandingPage() {
         </Sidebar>
         <MainView>
           {showDynamicComp ? (
-            <DynamicDisplayComp openForm={CrossIconFunction} data={data}/>
+            <DynamicDisplayComp openForm={CrossIconFunction} data={passingData}/>
+            
           ) : (
             <Facts>{fact}</Facts>
           )}

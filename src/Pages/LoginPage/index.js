@@ -27,6 +27,7 @@ export default function LoginPage() {
   useEffect(()=>{
     window.sessionStorage.setItem('name', '');
     window.sessionStorage.setItem('role', '')
+    window.sessionStorage.setItem('department', '')
   },[])
 
   const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;

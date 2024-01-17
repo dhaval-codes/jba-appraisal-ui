@@ -1,12 +1,10 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { EmptyWrpr, Footer, Header, Heading, MainWrpr, SubmitButton } from './index.sc'
 import { ReactComponent as CrossIcon } from '../../Assets/Images/SVGs/Cross.svg'
 import FormA1type from '../formA1'
-import { formData } from '../../Utils/formA1dummyData'
+import FormCtype from '../formC'
 
-export default function DynamicDisplayComp({openForm}) {
-
-  const [formDataState, setFormDataState] = useState()
+export default function DynamicDisplayComp({openForm, data}) {
 
   const SubmitForm = ()=>{
     openForm();
@@ -15,15 +13,17 @@ export default function DynamicDisplayComp({openForm}) {
   return (
     <MainWrpr>
         <Header>
-            <Heading>Dhaval</Heading>
+            <Heading>{data.name}</Heading>
             <CrossIcon style={{cursor: 'pointer'}} onClick={openForm}/>
         </Header>
         <EmptyWrpr>
-          {formDataState ? (
-            <FormA1type formData={formDataState}/>
-          ): (
+          {data.formData ? (
+            <FormA1type formData={data.formData}/>
+          ) : data.arrayData ? (
+            <FormCtype data={data.arrayData}/>
+          ) : (
             <>
-              <h1>This form is filled by your Senior</h1>
+              <h1>{data.content}</h1>
               <span>For further details contact support
                 <a href='mailto:someone@exaple.com'> someone@exaple.com</a>
               </span>
@@ -31,7 +31,7 @@ export default function DynamicDisplayComp({openForm}) {
           )}
         </EmptyWrpr>
         <Footer>
-          {formDataState ? (
+          {data.formData || data.arrayData ? (
             <SubmitButton onClick={SubmitForm}>Submit Form</SubmitButton>
           ) : <></>}
         </Footer>
