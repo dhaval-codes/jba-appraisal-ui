@@ -4,6 +4,7 @@ import { MainContainer, MainView, Facts, Sidebar, FormBtnCont } from './index.sc
 import FormButton from '../../Components/FormButton'
 import DetailsCont from '../../Components/DetailsComp'
 import DynamicDisplayComp from '../../Components/DynamicDisplayComponent'
+import SpecialButton from '../../Components/Other Appraisal Button'
 import axios from 'axios'
 
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -88,6 +89,7 @@ export default function LandingPage() {
                 onClick={()=>formButtonClick(i)}
               />))
             }
+            {Role === 'teacher' ? (<></>) : <SpecialButton/>} 
           </FormBtnCont>
           <DetailsCont/>
         </Sidebar>

@@ -10,6 +10,7 @@ import TestPage from "../Pages/TestPage";
 // navigation pages
 import LoginPage from "../Pages/LoginPage";
 import LandingPage from "../Pages/LandingPage";
+import A2FormsJunior from "../Pages/A2 form page for juniors";
 
 const navMenu = [
     {
@@ -34,6 +35,19 @@ const navMenu = [
                 <PageLoader/>
             }>
                 <LandingPage/>
+            </Suspense>
+        ),
+        roles: ["staff","HOD","Admin"]
+    },
+    {
+        label: 'A2 form juniors',
+        path: '/juniorA2',
+        element: (
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <A2FormsJunior/>
             </Suspense>
         ),
         roles: ["staff","HOD","Admin"]
