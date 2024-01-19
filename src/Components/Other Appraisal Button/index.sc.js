@@ -12,6 +12,7 @@ export const MainWrpr = styled.div`
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem;
+    transition: all 0.3s ease;
 
     &:hover{
         background: linear-gradient(270deg, #312B8B 0%, #000 100%);
