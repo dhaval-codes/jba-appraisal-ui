@@ -11,6 +11,7 @@ import TestPage from "../Pages/TestPage";
 import LoginPage from "../Pages/LoginPage";
 import LandingPage from "../Pages/LandingPage";
 import A2FormsJunior from "../Pages/A2 form page for juniors";
+import AdminPage from "../Pages/Admin Page";
 
 const navMenu = [
     {
@@ -24,7 +25,7 @@ const navMenu = [
                 <LoginPage/>
             </Suspense>
         ),
-        roles: ["staff","HOD","Admin"]
+        roles: ["staff","HOD","Admin","Co-ordinator"]
     },
     {
         label: 'Landing Page',
@@ -48,6 +49,19 @@ const navMenu = [
                 <PageLoader/>
             }>
                 <A2FormsJunior/>
+            </Suspense>
+        ),
+        roles: ["staff","HOD","Admin"]
+    },
+    {
+        label: 'A2 form juniors',
+        path: '/admin',
+        element: (
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <AdminPage/>
             </Suspense>
         ),
         roles: ["staff","HOD","Admin"]
