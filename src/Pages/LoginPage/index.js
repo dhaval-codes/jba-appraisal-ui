@@ -50,7 +50,11 @@ export default function LoginPage() {
           window.sessionStorage.setItem("name", response.data[0].name);
           window.sessionStorage.setItem("role", response.data[0].role);
           window.sessionStorage.setItem("department", response.data[0].department);
-          navigate("/Staff")
+          if(response.data[0].role === 'Admin'){
+            navigate("/admin")
+          } else {
+            navigate("/Staff")
+          }
         } else {
           setErrorVar(true);
           setTimeout(()=> {
