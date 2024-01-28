@@ -35,7 +35,7 @@ export default function DynamicDisplayComp2({name, CrossClick}) {
         <CrossIcon onClick={crossClickFunc} style={{cursor: 'pointer'}}/>
       </Header>
       <EmptyWrpr>
-        <FormA1type formData={formData}/>
+        <FormA1type formData={formData} name={name}/>
       </EmptyWrpr>
       <Footer>
         <SubmitButton>Submit Form</SubmitButton>

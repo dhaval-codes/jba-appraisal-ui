@@ -46,7 +46,8 @@ export const OptionsDiv = styled.div`
     font-size: 0.8125rem;
     font-weight: 300;
     padding: 0.5rem;
-    color: #000;
+    background-color: ${(props)=>props.bg === 'selected' ? '#312B8B' : '#fff'};
+    color: ${(props)=>props.bg === 'selected' ? '#fff' : '#000'};
     text-align: center;
     cursor: pointer;
     display: flex;
@@ -65,7 +66,7 @@ export const OptionsDiv = styled.div`
 
     p{
         font-size: 1rem;
-        color: #000;
+        color: ${(props)=>props.bg === 'selected' ? '#fff' : '#000'};
         margin: 0;
     }
 `;
