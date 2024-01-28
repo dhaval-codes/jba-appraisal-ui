@@ -32,6 +32,7 @@ export const ProfileTooltipWrpr = styled.div`
     position: absolute;
     right: 3rem;
     top: 5rem;
+    z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
