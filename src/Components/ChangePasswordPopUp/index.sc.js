@@ -20,6 +20,7 @@ export const PopUpWrpr = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 `;
 
 export const HeadingWrpr = styled.div`
@@ -57,6 +58,8 @@ export const Label = styled.label`
     color: #252525;
     font-size: 0.875rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
 `;
 
 export const InputBox = styled.input`
@@ -96,10 +99,17 @@ export const BufferImage = styled.img`
 `;
 
 export const GreenCircle = styled.div`
-    width: 0.875rem;
-    height: 0.875rem;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
     position: relative;
     z-index: 20000;
-    background-color: #00ff00;
+    background-color: ${(props)=>props.color};
+    margin-left: 0.5rem;
+`;
+
+export const GifImg = styled.img`
+    height: 75%;
+    width: 75%;
+    border-radius: 50%;
 `;
