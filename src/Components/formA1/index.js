@@ -5,10 +5,8 @@ export default function FormA1type({formData, name}) {
   const [clickedOptions, setClickedOptions] = useState(Array(formData.length).fill(''));
 
   const onClickFunc = (itemIndex, optionIndex) => {
-    
     const newClickedOptions = [...clickedOptions];
     newClickedOptions[itemIndex] = optionIndex;
-
     setClickedOptions(newClickedOptions);
   }
 
@@ -29,8 +27,7 @@ export default function FormA1type({formData, name}) {
                   onClick={() => onClickFunc(index, optionIndex)}
                   >
                     <p>{`${optionIndex+1}`}</p>
-                  {option}
-                 
+                  {option} 
                 </OptionsDiv>
             ))}
             </OptionsWrpr>
