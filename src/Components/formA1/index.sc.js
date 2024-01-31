@@ -40,7 +40,7 @@ export const OptionsWrpr = styled.div`
 
 export const OptionsDiv = styled.div`
     height: auto;
-    width: calc(100%/5);
+    width: ${(props) => `calc(100% / ${props.width})`};
     border-radius: 0.6125rem;
     border: 2px solid #d9d9d9;
     font-size: 0.8125rem;
@@ -58,6 +58,7 @@ export const OptionsDiv = styled.div`
 
     &:hover{
         background-color: #312B8B;
+        transition: all ease-in-out 0.3s;
         color: #fff;
         p {
             color: #fff;
