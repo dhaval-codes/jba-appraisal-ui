@@ -86,3 +86,8 @@ export const CancelButton = styled.button`
         transition: all ease-in-out 0.5s;
     }
 `;
+
+export const GifImg = styled.img`
+    height: 10rem;
+    width: 10rem;
+`;

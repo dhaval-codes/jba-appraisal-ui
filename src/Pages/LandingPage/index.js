@@ -19,6 +19,7 @@ export default function LandingPage() {
 
   const Role = window.sessionStorage.getItem("role");
   const Department = window.sessionStorage.getItem("department")
+  const Name = window.sessionStorage.getItem("name")
 
   const SideBarFormData = async (Role)=>{
     try{
@@ -39,11 +40,12 @@ export default function LandingPage() {
     }
   }
 
-  const GetForms = async (Department, Role) => {
+  const GetForms = async (Department, Role, Name) => {
     try{
       const response = await axios.post(`${REACT_APP_API_BASE_URL}formData`, {
         department: Department,
-        role: Role
+        role: Role,
+        name: Name
       })
       setData(response.data)
     } catch (e) {
@@ -70,9 +72,9 @@ export default function LandingPage() {
 
   useEffect(()=>{
     SideBarFormData(Role);
-    GetForms(Department, Role);
+    GetForms(Department, Role, Name);
     GetFact();
-  },[])
+  },[Department, Name, Role])
   
   return (
     <>

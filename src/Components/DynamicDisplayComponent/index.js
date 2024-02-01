@@ -11,7 +11,6 @@ export default function DynamicDisplayComp({openForm, data}) {
 
   const handleArrayChange = (updatedArray) => {
     setReceivedArray(updatedArray);
-    // console.log(receivedArray,"recieved array")
   };
 
   const ArrayLengthFunc = (data) => {

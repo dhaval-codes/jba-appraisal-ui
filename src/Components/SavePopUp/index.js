@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
-import { ButtonContainer, CancelButton, Container, MainBackgroundWrpr, MainPopUp, SubmitButton, WarningText } from './index.sc'
+import { ButtonContainer, CancelButton, Container, MainBackgroundWrpr, MainPopUp, SubmitButton, WarningText, GifImg } from './index.sc'
 import axios from 'axios'
+import Check from '../../Assets/Gifs/check-green.gif'
 
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -13,6 +14,7 @@ export default function SavePopUp({myArray, cancelFunc, comparingArrayData, pass
     const [globalRole, setGlobalRole] = useState('')
     const [globalDepartment, setGlobalDepartment] = useState('')
     const [sendArray, setSendArray] = useState([])
+    const [showDoneAnimation, setDoneAnimation] = useState(false)
 
     // date/time constant
     const currentDate = new Date();
@@ -45,7 +47,12 @@ export default function SavePopUp({myArray, cancelFunc, comparingArrayData, pass
                 timePeriod: currentDate,
                 filledData: sendArray
             })
-            console.log(response.data)
+            if(response.data === 'submited'){
+                setDoneAnimation(true)
+                setTimeout(()=>{
+                    window.location.reload();
+                }, 1600)
+            }
         } catch (e) {
             console.log(e)
         }
@@ -67,6 +74,9 @@ export default function SavePopUp({myArray, cancelFunc, comparingArrayData, pass
   return (
     <MainBackgroundWrpr>
         <MainPopUp>
+            {showDoneAnimation ? (
+                <GifImg src={Check}/>
+            ) : (
             <Container>
                 <WarningText color={textColor}>{warningToShow}</WarningText>
                 <ButtonContainer>
@@ -74,6 +84,8 @@ export default function SavePopUp({myArray, cancelFunc, comparingArrayData, pass
                     <CancelButton onClick={cancelFunc}>Cancel</CancelButton>
                 </ButtonContainer>
             </Container>
+            )}
+            
         </MainPopUp>
     </MainBackgroundWrpr>
   )
