@@ -18,12 +18,22 @@ export default function SavePopUp({myArray, cancelFunc, comparingArrayData, pass
     const currentDate = new Date();
 
     const CheckArrayFunc = (myArray, compare) => {
-        if(myArray.length < compare){
+        if (myArray.some(element => element === undefined || null)) {
             setTextColor('warning');
-            setWarningToShow("Form is not completly filled! Once submitted can't fill again")
+            setWarningToShow("Form is not completely filled! Once submitted can't fill again");
         }
-    }
 
+        if (myArray.some(element => element === '')) {
+            setTextColor('warning');
+            setWarningToShow("Form is not completely filled! Once submitted can't fill again");
+        }
+      
+        if (myArray.length < compare) {
+            setTextColor('warning');
+            setWarningToShow("Form is not completely filled! Once submitted can't fill again");
+        }
+    };
+      
     const SubmitFormFunction = async () => {
         try{
             const response = await axios.post(`${REACT_APP_API_BASE_URL}submitForm`,{
@@ -39,7 +49,7 @@ export default function SavePopUp({myArray, cancelFunc, comparingArrayData, pass
         } catch (e) {
             console.log(e)
         }
-    }
+    };
 
     useEffect(()=>{
         CheckArrayFunc(myArray, comparingArrayData);

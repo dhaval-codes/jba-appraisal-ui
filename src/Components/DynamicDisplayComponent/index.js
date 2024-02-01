@@ -11,6 +11,7 @@ export default function DynamicDisplayComp({openForm, data}) {
 
   const handleArrayChange = (updatedArray) => {
     setReceivedArray(updatedArray);
+    // console.log(receivedArray,"recieved array")
   };
 
   const ArrayLengthFunc = (data) => {
@@ -48,7 +49,10 @@ export default function DynamicDisplayComp({openForm, data}) {
               width={GrithFinderFunc(data)}
             />
           ) : data.arrayData ? (
-            <FormCtype data={data.arrayData}/>
+            <FormCtype 
+              data={data.arrayData} 
+              onArrayChange={handleArrayChange}
+            />
           ) : (
             <>
               <h1>{data.content}</h1>
