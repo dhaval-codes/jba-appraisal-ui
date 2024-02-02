@@ -39,6 +39,20 @@ export const EmptyWrpr = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
+
+     h1{
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #000;
+        margin: 0;
+    }
+
+    span {
+        font-size: 0.8125rem;
+        color: #000;
+        font-weight: 300;
+        margin: 0;
+    }
 `;
 
 export const Footer = styled.div`

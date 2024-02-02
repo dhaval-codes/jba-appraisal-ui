@@ -17,8 +17,9 @@ export default function DynamicDisplayComp2({name, CrossClick}) {
   };
 
   const GetFormFunction = async (name) => {
+    const fnam = window.sessionStorage.getItem('name')
     try{
-      let request = await axios.get(`${REACT_APP_API_BASE_URL}juniorA2/formData?for=${name}`)
+      let request = await axios.get(`${REACT_APP_API_BASE_URL}juniorA2/formData?for=${name}&fillersName=${fnam}`)
       setCompleteFormData(request.data);
     } catch (e) {
       console.log(e)
@@ -80,9 +81,11 @@ export default function DynamicDisplayComp2({name, CrossClick}) {
         )}
       </EmptyWrpr>
       <Footer>
+        {completeFormData?.formData && (
         <SubmitButton onClick={SubmitForm}>
           Submit Form
         </SubmitButton>
+        )}
       </Footer>
     </MainWrpr>
     {savePopUp &&
