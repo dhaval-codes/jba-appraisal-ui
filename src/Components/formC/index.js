@@ -9,7 +9,6 @@ export default function FormCtype({data, onArrayChange}) {
             const newInputValues = [...prevInputValues];
             newInputValues[index] = value;
             onArrayChange(newInputValues); 
-            // console.log(newInputValues, "input values");
             return newInputValues;
         });
     };    

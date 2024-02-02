@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { MainWrpr, OptionsDiv, OptionsWrpr, QuestionHeading, SegmentWrpr } from './index.sc'
 
 export default function FormA1type({formData, name, onArrayChange, width}) {
-  const [clickedOptions, setClickedOptions] = useState(Array(formData.length).fill(''));
+  const [clickedOptions, setClickedOptions] = useState(Array(formData?.length).fill(''));
 
   // chat GPT func, study this
   const onClickFunc = (itemIndex, optionIndex) => {
@@ -20,7 +20,7 @@ export default function FormA1type({formData, name, onArrayChange, width}) {
 
   return (
     <MainWrpr>
-        {formData.map((item, index) => (
+        {formData?.map((item, index) => (
         <SegmentWrpr key={index}>
             <QuestionHeading>{`${index+1}) ${item.ques}`}</QuestionHeading>
             <OptionsWrpr>
