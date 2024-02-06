@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import ApplicationHeader from '../../Components/Header'
 import { CardsDisplay, CardsDisplayWrpr, DynamicButton, FormBtnCont, HeadingSecton, HorizontailLine, ListItem, MainCont, MainHeading, MainWrpr, Sidebar, SubHeading, UnorderedList } from './index.sc'
+import EmployeeRankCard from '../../Components/EmployeeCard'
+import axios from 'axios'
 
 const sideBarMappingOptions = [
     {
@@ -21,8 +23,25 @@ const sideBarMappingOptions = [
     }
 ]
 
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export default function AdminPage() {
+    const [topEmployeeMapping, setTopEmployeeMapping] = useState([])
+
+    const GetTopEmployeesFunc = async ()=>{
+        try{
+            const response = await axios.post(`${REACT_APP_API_BASE_URL}admin/getTopEmployees`,{
+                send: true
+            })
+            setTopEmployeeMapping(response.data)
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(()=>{
+        GetTopEmployeesFunc();
+    },[])
 
   return (
     <>
@@ -45,7 +64,17 @@ export default function AdminPage() {
                 </HeadingSecton>
                 <CardsDisplay>
                     <SubHeading>Top Performing Employees</SubHeading>
-                    <CardsDisplayWrpr></CardsDisplayWrpr>
+                    <CardsDisplayWrpr>
+                        {topEmployeeMapping.map((item,i)=>(
+                            <EmployeeRankCard
+                                marks={item.averageFracArray}
+                                name={item.name}
+                                department={item.department}
+                                medalName={item.medal}
+                                staffCode={item.staffCode}
+                            />
+                        ))}
+                    </CardsDisplayWrpr>
                 </CardsDisplay>
             </MainCont>
         </MainWrpr>

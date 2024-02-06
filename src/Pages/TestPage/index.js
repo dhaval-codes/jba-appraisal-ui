@@ -7,7 +7,13 @@ export default function TestPage() {
   return (
     <MainWrpr>
       <TestRow>
-        <EmployeeRankCard/>
+        <EmployeeRankCard
+          marks={4.78}
+          name={'Amit Kumar Upaddhyay'}
+          department={'CS'}
+          staffCode={893}
+          medalName={'gold'}
+        />
       </TestRow>
     </MainWrpr>
   )
