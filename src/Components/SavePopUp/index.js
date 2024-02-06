@@ -41,7 +41,7 @@ export default function SavePopUp({myArray, cancelFunc, comparingArrayData, pass
             const response = await axios.post(`${REACT_APP_API_BASE_URL}submitForm`,{
                 formName: formName,
                 filledBy: loginName,
-                applicantsName: applicantsName,
+                applicantsName: applicantsName ? applicantsName : loginName,
                 fillersDesignation: globalRole,
                 applicantsDepartment: globalDepartment,
                 timePeriod: currentDate,

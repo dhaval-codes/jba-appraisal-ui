@@ -13,7 +13,7 @@ export default function SpecialButton() {
 
   useEffect(()=>{
     setRole(GetJuniorRole(role))
-  },[])
+  },[role])
 
   return (
     <MainWrpr onClick={()=> navigate("/juniorA2")}>

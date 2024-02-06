@@ -1,12 +1,14 @@
 import React from 'react'
-import { MainWrpr } from './index.sc'
-import SavePopUp from '../../Components/SavePopUp'
+import { MainWrpr, TestRow } from './index.sc'
+import EmployeeRankCard from '../../Components/EmployeeCard'
 
 
 export default function TestPage() {
   return (
     <MainWrpr>
-      <SavePopUp myArray={[2,3,4,5,9,2,3,4,5,9,2,3,4,5,9]}/>
+      <TestRow>
+        <EmployeeRankCard/>
+      </TestRow>
     </MainWrpr>
   )
 }
