@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-export default function DynamicDisplayComp2({name, CrossClick}) {
+export default function DynamicDisplayComp2({name, CrossClick, passedStaffCode}) {
   const [completeFormData, setCompleteFormData] = useState([])
   const [savePopUp, setSavePopUp] = useState(false)
   const [receivedArray, setReceivedArray] = useState([]);
@@ -95,6 +95,7 @@ export default function DynamicDisplayComp2({name, CrossClick}) {
         cancelFunc={SubmitForm}
         passedFormName={completeFormData.name}
         name={name}
+        staffCode={passedStaffCode}
       />
     }
     </>

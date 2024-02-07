@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { EmptyWrpr, Footer, Header, Heading, MainWrpr, SubmitButton } from './index.sc'
 import { ReactComponent as CrossIcon } from '../../Assets/Images/SVGs/Cross.svg'
 import FormA1type from '../formA1'
@@ -8,6 +8,7 @@ import SavePopUp from '../SavePopUp'
 export default function DynamicDisplayComp({openForm, data}) {
   const [showSavePopUp, setShowSavePopUp] = useState(false);
   const [receivedArray, setReceivedArray] = useState([]);
+  const [currentStaffCode, setCurrentStaffCode] = useState()
 
   const handleArrayChange = (updatedArray) => {
     setReceivedArray(updatedArray);
@@ -32,6 +33,10 @@ export default function DynamicDisplayComp({openForm, data}) {
   const SubmitForm = ()=>{
     setShowSavePopUp(!showSavePopUp)
   }
+
+  useEffect(()=>{
+    setCurrentStaffCode(parseInt(window.sessionStorage.getItem('staffCode')))
+  },[])
 
   return (
     <>
@@ -73,6 +78,7 @@ export default function DynamicDisplayComp({openForm, data}) {
         comparingArrayData={ArrayLengthFunc(data)}
         cancelFunc={SubmitForm}
         passedFormName={data.name}
+        staffCode={currentStaffCode}
       />
     )} 
     </>

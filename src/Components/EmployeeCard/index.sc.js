@@ -59,6 +59,7 @@ export const SemiHeading = styled.p`
     span {
         font-weight: 400;
         color: #4d4d4d;
+        text-transform: uppercase;
     }
 `;
 

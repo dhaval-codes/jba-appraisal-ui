@@ -1,8 +1,28 @@
 import React, {useState, useEffect} from 'react'
 import ApplicationHeader from '../../Components/Header'
-import { CardsDisplay, CardsDisplayWrpr, DynamicButton, FormBtnCont, HeadingSecton, HorizontailLine, ListItem, MainCont, MainHeading, MainWrpr, Sidebar, SubHeading, UnorderedList } from './index.sc'
+import { BarCont, CardsDisplay, CardsDisplayWrpr, DynamicButton, FormBtnCont, GraphDisplayWrpr, GraphHeading, HeadingSecton, HorizontailLine, ListItem, MainCont, MainHeading, MainWrpr, Sidebar, SubHeading, UnorderedList } from './index.sc'
 import EmployeeRankCard from '../../Components/EmployeeCard'
 import axios from 'axios'
+
+// importing chart components
+import {
+    Chart as ChartJS,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+} from 'chart.js';
+
+import { Bar } from 'react-chartjs-2'
+
+// registering Chart components
+
+ChartJS.register(
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip
+)
 
 const sideBarMappingOptions = [
     {
@@ -27,11 +47,13 @@ const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export default function AdminPage() {
     const [topEmployeeMapping, setTopEmployeeMapping] = useState([])
+    const [barChartData, setBarChartData] = useState({})
 
+    const Role = window.sessionStorage.getItem('role')
     const GetTopEmployeesFunc = async ()=>{
         try{
             const response = await axios.post(`${REACT_APP_API_BASE_URL}admin/getTopEmployees`,{
-                send: true
+                send: Role
             })
             setTopEmployeeMapping(response.data)
         } catch(e) {
@@ -39,8 +61,20 @@ export default function AdminPage() {
         }
     }
 
+    const GetBarChartData = async () => {
+        try{
+            let barDataResponse = await axios.post(`${REACT_APP_API_BASE_URL}admin/getBarData`,{
+                send: Role,
+            })
+            console.log(barDataResponse.data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     useEffect(()=>{
         GetTopEmployeesFunc();
+        GetBarChartData();
     },[])
 
   return (
@@ -76,6 +110,14 @@ export default function AdminPage() {
                         ))}
                     </CardsDisplayWrpr>
                 </CardsDisplay>
+                <BarCont>
+                    <SubHeading>Employee Performance Insights</SubHeading> 
+                    <GraphDisplayWrpr>
+                        <GraphHeading>
+                            Comparative Analysis: Departmental Average Ratings vs School-wide Performace &#40;A1&#41;
+                        </GraphHeading>
+                    </GraphDisplayWrpr>  
+                </BarCont>
             </MainCont>
         </MainWrpr>
     </>

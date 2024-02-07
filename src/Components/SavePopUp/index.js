@@ -5,7 +5,7 @@ import Check from '../../Assets/Gifs/check-green.gif'
 
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-export default function SavePopUp({myArray, cancelFunc, comparingArrayData, passedFormName, name}) {
+export default function SavePopUp({myArray, cancelFunc, comparingArrayData, passedFormName, name, staffCode}) {
     const [textColor, setTextColor] = useState('')
     const [warningToShow, setWarningToShow] = useState('Do you want to submit the form')
     const [loginName, setLoginName] = useState('')
@@ -42,6 +42,7 @@ export default function SavePopUp({myArray, cancelFunc, comparingArrayData, pass
                 formName: formName,
                 filledBy: loginName,
                 applicantsName: applicantsName ? applicantsName : loginName,
+                applicantsStaffCode: staffCode,
                 fillersDesignation: globalRole,
                 applicantsDepartment: globalDepartment,
                 timePeriod: currentDate,

@@ -28,6 +28,7 @@ export default function LoginPage() {
     window.sessionStorage.setItem('name', '');
     window.sessionStorage.setItem('role', '')
     window.sessionStorage.setItem('department', '')
+    window.sessionStorage.setItem('staffCode', '')
   },[])
 
   const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -50,6 +51,7 @@ export default function LoginPage() {
           window.sessionStorage.setItem("name", response.data[0].name);
           window.sessionStorage.setItem("role", response.data[0].role);
           window.sessionStorage.setItem("department", response.data[0].department);
+          window.sessionStorage.setItem("staffCode", response.data[0].staffCode)
           if(response.data[0].role === 'Admin'){
             navigate("/admin")
           } else {

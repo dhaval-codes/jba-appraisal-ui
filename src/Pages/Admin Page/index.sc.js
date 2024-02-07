@@ -120,3 +120,25 @@ export const CardsDisplayWrpr = styled.div`
     gap: 3rem;
 `;
 
+export const BarCont = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+`;
+
+export const GraphDisplayWrpr = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    border: 2px solid #d9d9d9;
+    border-radius: 0.6125rem;
+    padding: 0.25rem;
+`;
+
+export const GraphHeading = styled.h2`
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+`;

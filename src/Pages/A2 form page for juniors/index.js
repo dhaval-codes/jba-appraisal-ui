@@ -13,6 +13,7 @@ export default function A2FormsJunior() {
   const [clicked, setClicked] = useState('')
   const [showForm, setShowForm] = useState(false)
   const [activeName, setActiveName] = useState('')
+  const [juniorStaffCode, setJuniorStaffCode] = useState()
 
   const Role = window.sessionStorage.getItem("role");
   const Department = window.sessionStorage.getItem("department");
@@ -29,15 +30,17 @@ export default function A2FormsJunior() {
     }
   }
 
-  const ActiveFormFunc = (i, name) => {
+  const ActiveFormFunc = (i, name, staffCode) => {
     if(clicked === i){
       setClicked('')
       setShowForm(false)
       setActiveName('')
+      setJuniorStaffCode()
     } else {
       setClicked(i)
       setShowForm(true)
       setActiveName(name)
+      setJuniorStaffCode(staffCode)
     }
   }
 
@@ -46,6 +49,8 @@ export default function A2FormsJunior() {
     setShowForm(false)
     setActiveName('')
   }
+
+  console.log(L1MappingStaffData)
 
   useEffect(()=>{
     MappingStaff(Role,Department);
@@ -65,7 +70,7 @@ export default function A2FormsJunior() {
                 staffNumber={item.staffCode} 
                 key={index}
                 clicked={clicked === index ? 'clicked' : ''}
-                onClick={()=>ActiveFormFunc(index, item.name)}
+                onClick={()=>ActiveFormFunc(index, item.name, item.staffCode)}
               />
             ))}
           </ScrolableContainer>
@@ -75,6 +80,7 @@ export default function A2FormsJunior() {
             <DynamicDisplayComp2 
               name={activeName}
               CrossClick={FormCrossClick}
+              passedStaffCode={juniorStaffCode}
             />
           ) : (
             <NoDataComp/>
