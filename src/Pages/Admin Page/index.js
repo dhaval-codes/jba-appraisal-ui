@@ -101,10 +101,10 @@ export default function AdminPage() {
                     <CardsDisplayWrpr>
                         {topEmployeeMapping.map((item,i)=>(
                             <EmployeeRankCard
-                                marks={item.averageFracArray}
+                                marks={item.marks}
                                 name={item.name}
                                 department={item.department}
-                                medalName={item.medal}
+                                medalName={i}
                                 staffCode={item.staffCode}
                             />
                         ))}

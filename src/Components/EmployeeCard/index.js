@@ -8,9 +8,9 @@ export default function EmployeeRankCard({marks, name, department, staffCode, me
   return (
     <MainWrpr>
       <UpperCardPart>
-        {medalName === 'gold' ? (
+        {medalName === 0 ? (
             <ImageTag src={GoldMedal}/> 
-        ) : medalName === 'silver' ? (
+        ) : medalName === 1 ? (
             <ImageTag src={SilverMedal}/>
         ) : (
             <ImageTag src={BronzMedal}/>
