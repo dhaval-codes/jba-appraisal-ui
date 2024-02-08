@@ -16,7 +16,7 @@ export default function SpecialButton() {
   },[role])
 
   return (
-    <MainWrpr onClick={()=> navigate("/juniorA2")}>
+    <MainWrpr onClick={()=> navigate("/junior-appraisal")}>
       <Text>{`Fill A2 form of ${Role}`}</Text>
     </MainWrpr>
   )

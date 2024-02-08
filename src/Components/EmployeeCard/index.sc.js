@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MainWrpr = styled.div`
     height: 100%;
-    width: 15.625rem;
+    min-width: 15.625rem;
     border: 2px solid #d9d9d9;
     border-radius: 0.6125rem;
     display: grid;

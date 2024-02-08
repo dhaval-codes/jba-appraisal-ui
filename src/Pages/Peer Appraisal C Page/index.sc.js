@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
+export const PageWrpr = styled.div`
+    height: 100vh;
+    width: 100vw;
+`;
+
 export const MainWrpr = styled.div`
-     height: calc(100vh - 5.563rem);
-    width: 100%;
-    background-color: #fff;
+    height: calc(100% - 5.563rem);
+    width: 100vw;
     display: grid;
     grid-template-columns: 1fr 3fr;
 `;
 
-export const SideColumn = styled.div`
+export const SideBar = styled.div`
     height: 100%;
     width: 100%;
     background-color: #bcbcbc;
@@ -26,20 +30,14 @@ export const SemiHeading = styled.h2`
 `;
 
 export const ScrolableContainer = styled.div`
-    max-height: 50rem;
+    height: 45rem;
     width: 100%;
     overflow-y: auto;
     border: none;
     border-radius: 0.25rem;
     ::-webkit-scrollbar {
-    display: none;
-}`;
-
-export const MainContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
+        display: none;
+        width: 0;
+    }
+    scrollbar-width: none;
 `;

@@ -53,7 +53,7 @@ export const DynamicButton = styled.button`
 `;
 
 export const MainCont = styled.div`
-    height: 100%;
+    height: calc(100vh - 5.563rem);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -98,7 +98,7 @@ export const ListItem = styled.li`
 `;
 
 export const CardsDisplay = styled.div`
-    height: auto;
+    height: fit-content;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -113,7 +113,7 @@ export const SubHeading = styled.h3`
 `;
 
 export const CardsDisplayWrpr = styled.div`
-    width: 100%;
+    max-width: 100%;
     height: 8.5rem;
     display: flex;
     flex-direction: row;
@@ -136,6 +136,7 @@ export const GraphDisplayWrpr = styled.div`
     border-radius: 0.6125rem;
     padding: 0.25rem;
     flex-direction: column;
+    justify-content: space-between;
 `;
 
 export const GraphHeading = styled.h2`
@@ -145,6 +146,6 @@ export const GraphHeading = styled.h2`
 `;
 
 export const BarWrpr = styled.div`
-    height: 95%;
+    height: calc(100% - 3rem);
     width: 100%;
 `;

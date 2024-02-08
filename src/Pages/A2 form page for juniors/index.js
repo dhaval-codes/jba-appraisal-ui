@@ -50,8 +50,6 @@ export default function A2FormsJunior() {
     setActiveName('')
   }
 
-  console.log(L1MappingStaffData)
-
   useEffect(()=>{
     MappingStaff(Role,Department);
   },[Department, Role])

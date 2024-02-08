@@ -53,9 +53,9 @@ export default function LoginPage() {
           window.sessionStorage.setItem("department", response.data[0].department);
           window.sessionStorage.setItem("staffCode", response.data[0].staffCode)
           if(response.data[0].role === 'Admin'){
-            navigate("/admin")
+            navigate("/principal-administration")
           } else {
-            navigate("/Staff")
+            navigate("/self-appraisal")
           }
         } else {
           setErrorVar(true);

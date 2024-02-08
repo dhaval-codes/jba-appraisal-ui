@@ -12,6 +12,7 @@ import LoginPage from "../Pages/LoginPage";
 import LandingPage from "../Pages/LandingPage";
 import A2FormsJunior from "../Pages/A2 form page for juniors";
 import AdminPage from "../Pages/Admin Page";
+import PeerAppraisalCPage from "../Pages/Peer Appraisal C Page";
 
 const navMenu = [
     {
@@ -29,7 +30,7 @@ const navMenu = [
     },
     {
         label: 'Landing Page',
-        path: '/Staff',
+        path: '/self-appraisal',
         element: (
             <Suspense
             fallback={
@@ -42,7 +43,7 @@ const navMenu = [
     },
     {
         label: 'A2 form juniors',
-        path: '/juniorA2',
+        path: '/junior-appraisal',
         element: (
             <Suspense
             fallback={
@@ -54,14 +55,27 @@ const navMenu = [
         roles: ["staff","HOD","Admin"]
     },
     {
-        label: 'A2 form juniors',
-        path: '/admin',
+        label: 'Admins-Page',
+        path: '/principal-administration',
         element: (
             <Suspense
             fallback={
                 <PageLoader/>
             }>
                 <AdminPage/>
+            </Suspense>
+        ),
+        roles: ["staff","HOD","Admin"]
+    },
+    {
+        label: 'Appraisal - C view',
+        path: '/peer-appraisal-c-insights',
+        element: (
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <PeerAppraisalCPage/>
             </Suspense>
         ),
         roles: ["staff","HOD","Admin"]

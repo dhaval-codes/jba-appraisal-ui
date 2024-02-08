@@ -3,7 +3,7 @@ import ApplicationHeader from '../../Components/Header'
 import { BarCont, BarWrpr, CardsDisplay, CardsDisplayWrpr, DynamicButton, FormBtnCont, GraphDisplayWrpr, GraphHeading, HeadingSecton, HorizontailLine, ListItem, MainCont, MainHeading, MainWrpr, Sidebar, SubHeading, UnorderedList } from './index.sc'
 import EmployeeRankCard from '../../Components/EmployeeCard'
 import axios from 'axios'
-// import { barChartOptions } from '../../Utils/chartOptions'
+import { useNavigate } from 'react-router-dom'
 
 // importing chart components
 import {
@@ -28,11 +28,11 @@ ChartJS.register(
 const sideBarMappingOptions = [
     {
         label: 'Appraisal Input for Juniors',
-        nav: ''
+        nav: '/junior-appraisal'
     },
     {
         label: 'Peer Appraisal C Insights',
-        nav: ''
+        nav: '/peer-appraisal-c-insights'
     },
     {
         label: 'Employee Performance Insights',
@@ -49,21 +49,24 @@ const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 export default function AdminPage() {
     const [topEmployeeMapping, setTopEmployeeMapping] = useState([])
     const [barChartData, setBarChartData] = useState({
-        labels: ['English','Hindi','Maths','Science','Computer Science','Commerce','Humanities','Psycology','Physical Education','Performing Arts','Others'],
+        labels: ['Others'],
                 datasets: [
                     {
                         label:'Department Avg:',
-                        data: [],
+                        data: [0],
                         fillColor: '#252525'
                     },
                     {
                         label:'School Avg:',
-                        data: [],
+                        data: [0],
                         fillColor: '#000'
                     }
                 ]
     })
     const [barChartOptions, setBarChartOptions] = useState({})
+
+    const navigate = useNavigate();
+
     const Role = window.sessionStorage.getItem('role')
     const GetTopEmployeesFunc = async ()=>{
         try{
@@ -152,7 +155,9 @@ export default function AdminPage() {
             <Sidebar>
                 <FormBtnCont>
                     {sideBarMappingOptions.map((item, key)=>(
-                        <DynamicButton key={key}>{item.label}</DynamicButton>
+                        <DynamicButton onClick={()=> navigate(item.nav)}
+                            key={key}>{item.label}
+                        </DynamicButton>
                     ))}
                 </FormBtnCont>
             </Sidebar>
