@@ -1,16 +1,18 @@
 export const barChartOptions =  {
     scales: {
         x: {
-            beginAtZero: true,
+            // beginAtZero: true,
             grid: {
                 display: false
             }
         },
         y: {
-            beginAtZero: true,
+            suggestedMin: 3,
+            suggestedax:5,
+            // beginAtZero: true,
             grid: {
                 display: true
-            }
+            },
         }
     },
     responsive: true,

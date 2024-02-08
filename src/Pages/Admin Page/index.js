@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import ApplicationHeader from '../../Components/Header'
-import { BarCont, CardsDisplay, CardsDisplayWrpr, DynamicButton, FormBtnCont, GraphDisplayWrpr, GraphHeading, HeadingSecton, HorizontailLine, ListItem, MainCont, MainHeading, MainWrpr, Sidebar, SubHeading, UnorderedList } from './index.sc'
+import { BarCont, BarWrpr, CardsDisplay, CardsDisplayWrpr, DynamicButton, FormBtnCont, GraphDisplayWrpr, GraphHeading, HeadingSecton, HorizontailLine, ListItem, MainCont, MainHeading, MainWrpr, Sidebar, SubHeading, UnorderedList } from './index.sc'
 import EmployeeRankCard from '../../Components/EmployeeCard'
 import axios from 'axios'
+// import { barChartOptions } from '../../Utils/chartOptions'
 
 // importing chart components
 import {
@@ -47,8 +48,22 @@ const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export default function AdminPage() {
     const [topEmployeeMapping, setTopEmployeeMapping] = useState([])
-    const [barChartData, setBarChartData] = useState({})
-
+    const [barChartData, setBarChartData] = useState({
+        labels: ['English','Hindi','Maths','Science','Computer Science','Commerce','Humanities','Psycology','Physical Education','Performing Arts','Others'],
+                datasets: [
+                    {
+                        label:'Department Avg:',
+                        data: [],
+                        fillColor: '#252525'
+                    },
+                    {
+                        label:'School Avg:',
+                        data: [],
+                        fillColor: '#000'
+                    }
+                ]
+    })
+    const [barChartOptions, setBarChartOptions] = useState({})
     const Role = window.sessionStorage.getItem('role')
     const GetTopEmployeesFunc = async ()=>{
         try{
@@ -64,9 +79,62 @@ export default function AdminPage() {
     const GetBarChartData = async () => {
         try{
             let barDataResponse = await axios.post(`${REACT_APP_API_BASE_URL}admin/getBarData`,{
-                send: Role,
+                role: Role,
             })
-            console.log(barDataResponse.data)
+            const sclAvgArray = Array(11).fill(barDataResponse.data.schoolAvg)
+            const minValue = Math.min(...barDataResponse.data.subjCumalative);
+            const maxValue = Math.max(...barDataResponse.data.subjCumalative);
+
+            
+            const yAxisMin = Math.floor(minValue);
+            const yAxisMax = Math.ceil(maxValue);
+
+            setBarChartData({
+                labels: ['Eng','Hindi','Maths','Sci','CS','Commerce','Humanties','Psy','PE','PerArts','Others'],
+                datasets: [
+                    {
+                        label:'Department Avg',
+                        data: barDataResponse.data.subjCumalative,
+                        backgroundColor: '#312B8B'
+                    },
+                    {
+                        label:'School Avg',
+                        data: sclAvgArray,
+                        backgroundColor: '#d9d9d9'
+                    }
+                ]
+            })
+
+            const options = {
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        suggestedMin: yAxisMin,
+                        suggestedMax: yAxisMax,
+                        beginAtZero: false,
+                        grid: {
+                            display: true
+                        },
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: false,
+                    }
+                }
+            };
+
+            setBarChartOptions(options)
+
         } catch (e) {
             console.log(e)
         }
@@ -116,6 +184,12 @@ export default function AdminPage() {
                         <GraphHeading>
                             Comparative Analysis: Departmental Average Ratings vs School-wide Performace &#40;A1&#41;
                         </GraphHeading>
+                        <BarWrpr>
+                            <Bar
+                                data={barChartData}
+                                options={barChartOptions}
+                            />
+                        </BarWrpr>
                     </GraphDisplayWrpr>  
                 </BarCont>
             </MainCont>

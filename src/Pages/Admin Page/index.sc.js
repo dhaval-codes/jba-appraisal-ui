@@ -135,10 +135,16 @@ export const GraphDisplayWrpr = styled.div`
     border: 2px solid #d9d9d9;
     border-radius: 0.6125rem;
     padding: 0.25rem;
+    flex-direction: column;
 `;
 
 export const GraphHeading = styled.h2`
     font-size: 1.125rem;
     font-weight: 600;
     margin: 0;
+`;
+
+export const BarWrpr = styled.div`
+    height: 95%;
+    width: 100%;
 `;
