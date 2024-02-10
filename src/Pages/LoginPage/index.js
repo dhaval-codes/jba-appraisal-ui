@@ -74,7 +74,7 @@ export default function LoginPage() {
   return (
     <MainWrpr bg={BackgroundImage}>
       <LoginDiv>
-        <Logo style={{marginBottom:'2rem'}}/>
+        <Logo/>
         {MapingArray.map((item)=>(
           <Container onKeyDown={enterPress}>
             <FormLabel>{item.label}</FormLabel>

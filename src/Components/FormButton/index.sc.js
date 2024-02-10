@@ -12,6 +12,9 @@ export const MainCont = styled.div`
     padding: 0.5rem;
     cursor: pointer;
     box-shadow: -6px 6px 11.7px 3px rgba(0, 0, 0, 0.25);
+    @media screen and (min-width: 1024px) and (max-width: 1439px) {
+        height: 2.75rem;
+    }
 `;
 
 export const ContainerSubDiv = styled.div`
@@ -26,6 +29,9 @@ export const Title = styled.h3`
     font-size: 1.5rem;
     margin: 0;
     font-weight: 600;
+    @media screen and (min-width: 1024px) and (max-width: 1439px) {
+        font-size: 1rem;
+    }
 `;
 
 export const StatusCircle = styled.div`

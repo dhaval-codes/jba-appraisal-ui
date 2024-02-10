@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
+export const PageWrpr = styled.div`
+    height: 100vh;
+    width: 100vw;
+`;
+
 export const MainWrpr = styled.div`
-    height: calc(100vh - 5.563rem);
+    height: 100vh;
     width: 100%;
     background-color: #fff;
     display: grid;
     grid-template-columns: 1fr 3fr;
+    padding-top: 5.625rem;
 `;
 
 export const Sidebar = styled.div`
@@ -53,7 +59,7 @@ export const DynamicButton = styled.button`
 `;
 
 export const MainCont = styled.div`
-    height: calc(100vh - 5.563rem);
+    height: calc(100vh - 5.625rem);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -129,7 +135,7 @@ export const BarCont = styled.div`
 `;
 
 export const GraphDisplayWrpr = styled.div`
-    height: 100%;
+    height: calc(100% - 1rem);
     width: 100%;
     display: flex;
     border: 2px solid #d9d9d9;
@@ -146,6 +152,6 @@ export const GraphHeading = styled.h2`
 `;
 
 export const BarWrpr = styled.div`
-    height: calc(100% - 3rem);
+    height: 100%;
     width: 100%;
 `;

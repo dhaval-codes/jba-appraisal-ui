@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import ApplicationHeader from '../../Components/Header'
-import { MainContainer, MainWrpr, ScrolableContainer, SemiHeading, SideColumn } from './index.sc'
+import { MainContainer, MainWrpr, PageWrpr, ScrolableContainer, SemiHeading, SideColumn } from './index.sc'
 import StaffCardL1 from '../../Components/StaffCardL1'
 import NoDataComp from '../../Components/NoDataComp'
 import DynamicDisplayComp2 from '../../Components/DynamicDisplayComponent2'
@@ -55,7 +55,7 @@ export default function A2FormsJunior() {
   },[Department, Role])
 
   return (
-    <>
+    <PageWrpr>
       <ApplicationHeader/>
       <MainWrpr>
         <SideColumn>
@@ -86,6 +86,6 @@ export default function A2FormsJunior() {
         </MainContainer>
       </MainWrpr>
       
-    </>
+    </PageWrpr>
   )
 }

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const DetailsBox = styled.div`
     width: 100%;
     height: auto;
@@ -18,6 +17,9 @@ export const HeadingText = styled.h3`
     font-size: 1rem;
     font-weight: 600;
     margin: 0;
+    @media screen and (min-width: 1024px) and (max-width: 1439px) {
+        font-size: 0.8125rem;
+    }
 `;
 
 export const SemiContainerDiv = styled.div`

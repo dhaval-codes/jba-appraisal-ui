@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
+export const PageWrpr = styled.div`
+    height: 100vh;
+    width: 100vw;
+`;
+
 export const MainWrpr = styled.div`
-     height: calc(100vh - 5.563rem);
+    height: 100vh;
     width: 100%;
     background-color: #fff;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 3fr; 
+    padding-top: 5.625rem;
 `;
 
 export const SideColumn = styled.div`

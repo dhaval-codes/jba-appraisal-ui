@@ -11,8 +11,8 @@ export const MainWrpr = styled.div`
 `;
 
 export const LoginDiv = styled.div`
-    height: 450px;
-    width: 450px;
+    height: 20rem;
+    width: 20rem;
     background-color: #fff;
     display: flex;
     flex-direction: column;

@@ -9,6 +9,8 @@ export const MainWrpr = styled.div`
     background-color: #312B8B;
     align-items: center;
     justify-content: space-between;
+    height: 5.625rem;
+    position: fixed;
 `;
 
 export const Heading = styled.h1`

@@ -6,12 +6,5 @@ export const MainWrpr = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
 `;
-
-export const TestRow = styled.div`
-    width: 100%;
-    height: 8.5rem;
-    display: flex;
-    flex-direction: row;
-    gap: 3rem;
-`

@@ -63,7 +63,8 @@ export default function AdminPage() {
                     }
                 ]
     })
-    const [barChartOptions, setBarChartOptions] = useState({})
+    const [minValue, setMinValue] = useState(3)
+    const [maxValue, setMaxValue] = useState(5)
 
     const navigate = useNavigate();
 
@@ -92,6 +93,9 @@ export default function AdminPage() {
             const yAxisMin = Math.floor(minValue);
             const yAxisMax = Math.ceil(maxValue);
 
+            setMinValue(yAxisMin)
+            setMaxValue(yAxisMax)
+
             setBarChartData({
                 labels: ['Eng','Hindi','Maths','Sci','CS','Commerce','Humanties','Psy','PE','PerArts','Others'],
                 datasets: [
@@ -108,36 +112,6 @@ export default function AdminPage() {
                 ]
             })
 
-            const options = {
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        suggestedMin: yAxisMin,
-                        suggestedMax: yAxisMax,
-                        beginAtZero: false,
-                        grid: {
-                            display: true
-                        },
-                    }
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    },
-                    title: {
-                        display: false,
-                    }
-                }
-            };
-
-            setBarChartOptions(options)
-
         } catch (e) {
             console.log(e)
         }
@@ -147,6 +121,34 @@ export default function AdminPage() {
         GetTopEmployeesFunc();
         GetBarChartData();
     },[])
+
+    const options = {
+        scales: {
+            x: {
+                grid: {
+                    display: false
+                }
+            },
+            y: {
+                suggestedMin: minValue,
+                suggestedMax: maxValue,
+                beginAtZero: false,
+                grid: {
+                    display: true
+                },
+            }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            title: {
+                display: false,
+            }
+        }
+    };
 
   return (
     <>
@@ -162,27 +164,29 @@ export default function AdminPage() {
                 </FormBtnCont>
             </Sidebar>
             <MainCont>
-                <HeadingSecton>
-                    <MainHeading>Administrative Control Centre</MainHeading>
-                    <HorizontailLine/>
-                    <UnorderedList>
-                        <ListItem>Summary Insights</ListItem>
-                    </UnorderedList>
-                </HeadingSecton>
-                <CardsDisplay>
-                    <SubHeading>Top Performing Employees</SubHeading>
-                    <CardsDisplayWrpr>
-                        {topEmployeeMapping.map((item,i)=>(
-                            <EmployeeRankCard
-                                marks={item.marks}
-                                name={item.name}
-                                department={item.department}
-                                medalName={i}
-                                staffCode={item.staffCode}
-                            />
-                        ))}
-                    </CardsDisplayWrpr>
-                </CardsDisplay>
+                <div>
+                    <HeadingSecton>
+                        <MainHeading>Administrative Control Centre</MainHeading>
+                        <HorizontailLine/>
+                        <UnorderedList>
+                            <ListItem>Summary Insights</ListItem>
+                        </UnorderedList>
+                    </HeadingSecton>
+                    <CardsDisplay>
+                        <SubHeading>Top Performing Employees</SubHeading>
+                        <CardsDisplayWrpr>
+                            {topEmployeeMapping.map((item,i)=>(
+                                <EmployeeRankCard
+                                    marks={item.marks}
+                                    name={item.name}
+                                    department={item.department}
+                                    medalName={i}
+                                    staffCode={item.staffCode}
+                                />
+                            ))}
+                        </CardsDisplayWrpr>
+                    </CardsDisplay>
+                </div>
                 <BarCont>
                     <SubHeading>Employee Performance Insights</SubHeading> 
                     <GraphDisplayWrpr>
@@ -192,7 +196,7 @@ export default function AdminPage() {
                         <BarWrpr>
                             <Bar
                                 data={barChartData}
-                                options={barChartOptions}
+                                options={options}
                             />
                         </BarWrpr>
                     </GraphDisplayWrpr>  

@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import ApplicationHeader from '../../Components/Header'
-import { MainContainer, MainView, Facts, Sidebar, FormBtnCont } from './index.sc'
+import { MainContainer, MainView, Facts, Sidebar, FormBtnCont, PageWrpr } from './index.sc'
 import FormButton from '../../Components/FormButton'
 import DetailsCont from '../../Components/DetailsComp'
 import DynamicDisplayComp from '../../Components/DynamicDisplayComponent'
@@ -77,7 +77,7 @@ export default function LandingPage() {
   },[Department, Name, Role])
   
   return (
-    <>
+    <PageWrpr>
       <ApplicationHeader/>
       <MainContainer>
         <Sidebar>
@@ -104,6 +104,6 @@ export default function LandingPage() {
           )}
         </MainView>
       </MainContainer>
-    </>
+    </PageWrpr>
   )
 }

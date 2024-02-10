@@ -6,10 +6,11 @@ export const PageWrpr = styled.div`
 `;
 
 export const MainWrpr = styled.div`
-    height: calc(100% - 5.563rem);
+    height: 100vh;
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr 3fr;
+    padding-top: 5.625rem;
 `;
 
 export const SideBar = styled.div`
@@ -40,4 +41,12 @@ export const ScrolableContainer = styled.div`
         width: 0;
     }
     scrollbar-width: none;
+`;
+
+export const ViewFormWrpr = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
 `;
