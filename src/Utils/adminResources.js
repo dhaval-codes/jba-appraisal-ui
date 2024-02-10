@@ -1,28 +1,39 @@
-export const StaffTableContents = [
-    // { field: 'id', headerName: 'ID', width: 0 },
+export const columns = [
+    // { field: 'id', headerName: 'ID', width: 90 },
     {
         field: 'name',
-        headerName: 'EmployeeName',
+        headerName: 'Name',
         width: 250,
         editable: false,
     },
     {
-        field: 'department',
-        headerName: 'Department',
-        width: 150,
-        editable: false,
-    },
-    {
-        field: 'role',
-        headerName: 'Role',
+        field: 'staffCode',
+        headerName: 'StaffCode',
+        type: 'number',
         width: 100,
         editable: false,
+        align: 'center'
     },
     {
-        field: 'staffCode',
-        headerName: 'Staff Code',
-        type: 'number',
-        width: 150,
+        field: 'department',
+        headerName: 'Department',
+        width: 100,
         editable: false,
+        align: 'center'
     },
-]
+    {
+        field: 'appraisalA1',
+        headerName: 'Appraisal A1 filled',
+        sortable: false,
+        width: 150,
+        align: 'center'
+    },
+    {
+        field: 'appraisalC',
+        headerName: 'Appraisal C Filled',
+        editable: false,
+        width: 150,
+        align: 'center'
+    }
+];
+  

@@ -13,6 +13,7 @@ import LandingPage from "../Pages/LandingPage";
 import A2FormsJunior from "../Pages/A2 form page for juniors";
 import AdminPage from "../Pages/Admin Page";
 import PeerAppraisalCPage from "../Pages/Peer Appraisal C Page";
+import EmployeePerformacePage from "../Pages/Employee Performance Page";
 
 const navMenu = [
     {
@@ -76,6 +77,19 @@ const navMenu = [
                 <PageLoader/>
             }>
                 <PeerAppraisalCPage/>
+            </Suspense>
+        ),
+        roles: ["staff","HOD","Admin"]
+    },
+    {
+        label: 'Employee Performance Insights',
+        path: '/employee-performance-insights',
+        element: (
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <EmployeePerformacePage/>
             </Suspense>
         ),
         roles: ["staff","HOD","Admin"]

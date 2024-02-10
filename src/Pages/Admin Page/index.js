@@ -36,7 +36,7 @@ const sideBarMappingOptions = [
     },
     {
         label: 'Employee Performance Insights',
-        nav: ''
+        nav: '/employee-performance-insights'
     },
     {
         label: 'Staff Management',
