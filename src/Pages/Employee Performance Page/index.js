@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { LeftWrpr, MainWrpr, PageWrpr } from './index.sc'
+import { DropDowWrpr, GroupingWrpr, Heading, HeadingWrpr, LeftWrpr, MainContainer, MainWrpr, Options, PageWrpr, RightWrpr, UpperBarChartWrpr, ViewBox} from './index.sc'
 import ApplicationHeader from '../../Components/Header'
 import { DataGrid } from '@mui/x-data-grid'
 import { columns } from '../../Utils/adminResources'
@@ -41,6 +41,30 @@ export default function EmployeePerformacePage() {
                     getRowId={getRowId}
                 />
             </LeftWrpr>
+            <RightWrpr>
+                <UpperBarChartWrpr>
+                    <HeadingWrpr>
+                        <Heading>
+                            Academic Rating Spotlight
+                        </Heading>
+                        <GroupingWrpr>
+                            <MainContainer>
+                                <ViewBox>
+                                    {`Year`}
+                                </ViewBox>
+                                <DropDowWrpr>
+                                <Options>Dhaval</Options>
+                                <Options>Dhaval</Options>
+                                <Options>Dhaval</Options>
+                                </DropDowWrpr>
+                            </MainContainer>
+                        </GroupingWrpr>
+                    </HeadingWrpr>
+                </UpperBarChartWrpr>
+                <UpperBarChartWrpr>
+
+                </UpperBarChartWrpr>
+            </RightWrpr>
         </MainWrpr>
     </PageWrpr>
   )
