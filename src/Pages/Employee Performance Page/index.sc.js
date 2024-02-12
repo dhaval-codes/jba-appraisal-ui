@@ -60,45 +60,76 @@ export const Heading = styled.h2`
     font-weight: 700;
 `;
 
-export const GroupingWrpr = styled.div`
-    display: flex;
-    gap: 1rem;
+export const DropDownGroup = styled.div`
     height: 100%;
     width: auto;
+    display: flex;
+    gap: 1rem;
+    margin-right: 1rem;
 `;
 
-export const DropDowWrpr = styled.div`
-    max-height: 4.5rem;
-    width: 5rem;
-`;
-
-export const MainContainer = styled.div`
+export const IndiDropDownWrpr = styled.div`
+    width: auto;
+    height: fit-content;
+    position: relative;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
-    width: 5rem;
-`;
-
-export const Options = styled.div`
-    height: 1.5rem;
-    height: 1.5rem;
-    width: 5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid black;
-    cursor: pointer;
+    margin-top: 0.75rem;
 `;
 
 export const ViewBox = styled.div`
+    width: fit-content;
+    text-transform: capitalize;
+    padding: 0.5rem 2.5rem 0.5rem 2.5rem;
     height: 1.5rem;
-    width: 5rem;
+    border: 1px solid #d9d9d9;
     font-size: 1rem;
-    font-weight: 600;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
     cursor: pointer;
+    &:hover{
+        background-color: #d9d9d9;
+    }
+`;
+
+export const OptionsWrpr = styled.div`
+    height: auto;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    gap: 0;
+    align-items: center;
+`;
+
+export const Options = styled.div`
+    text-transform: capitalize;
+    width: 100%;
+    height: 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &:hover{
+        background-color: #d9d9d9;
+    }
+`;
+
+export const BarChartWrpr = styled.div`
+    width: 100%;
+    height: calc(100% - 3rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.6125rem;
 `;
