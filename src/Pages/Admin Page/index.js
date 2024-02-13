@@ -84,10 +84,11 @@ export default function AdminPage() {
         try{
             let barDataResponse = await axios.post(`${REACT_APP_API_BASE_URL}admin/getBarData`,{
                 role: Role,
+                dept: "",
+                year: ""
             })
-            const sclAvgArray = Array(11).fill(barDataResponse.data.schoolAvg)
-            const minValue = Math.min(...barDataResponse.data.subjCumalative);
-            const maxValue = Math.max(...barDataResponse.data.subjCumalative);
+            const minValue = Math.min(...barDataResponse.data.indiArray);
+            const maxValue = Math.max(...barDataResponse.data.indiArray);
 
             
             const yAxisMin = Math.floor(minValue);
@@ -97,16 +98,16 @@ export default function AdminPage() {
             setMaxValue(yAxisMax)
 
             setBarChartData({
-                labels: ['Eng','Hindi','Maths','Sci','CS','Commerce','Humanties','Psy','PE','PerArts','Others'],
+                labels: barDataResponse.data.labels,
                 datasets: [
                     {
-                        label:'Department Avg',
-                        data: barDataResponse.data.subjCumalative,
+                        label: barDataResponse.data.firstName,
+                        data: barDataResponse.data.indiArray,
                         backgroundColor: '#312B8B'
                     },
                     {
-                        label:'School Avg',
-                        data: sclAvgArray,
+                        label: barDataResponse.data.secondName,
+                        data: barDataResponse.data.averageArray,
                         backgroundColor: '#d9d9d9'
                     }
                 ]

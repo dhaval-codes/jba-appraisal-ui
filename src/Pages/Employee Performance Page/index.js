@@ -15,6 +15,9 @@ import {
 } from 'chart.js';
 
 import { Bar } from 'react-chartjs-2'
+import { barChartOptions } from '../../Utils/chartOptions'
+
+//importing temp chart options
 
 // registering Chart components
 
@@ -37,6 +40,19 @@ export default function EmployeePerformacePage() {
     const [isGraphYearVisible, setIsGraphYearVisible] = useState(false)
     const deptRef = useRef();
     const [isGraphDeptVisible, setIsGraphDeptVisible] = useState(false)
+    const [barChartData, setBarChartData] = useState({
+        labels: 'label',
+        datasets: [
+            {
+                label: 'First dataset',
+                data: [0]
+            },
+            {
+                label: 'Second dataset',
+                data: [0]
+            }
+        ]
+    })
 
     const getTableData = async () =>{
         const globalRole = window.sessionStorage.getItem('role')
@@ -70,7 +86,22 @@ export default function EmployeePerformacePage() {
                 dept: selectedDepartmentGraph === 'Department' ? "" : selectedDepartmentGraph,
                 year: selectedYearGraph === 'Year' ? "" : selectedYearGraph
             })
-            console.log(response)
+            setBarChartData({
+                labels: response.data.labels,
+                datasets: [
+                    {
+                        label: response.data.firstName,
+                        data: response.data.indiArray,
+                        backgroundColor: '#312B8B'
+                    },
+                    {
+                        label: response.data.secondName,
+                        data: response.data.averageArray,
+                        backgroundColor: '#d9d9d9'
+                    }
+                    
+                ]
+            })
         } catch (e) {
             console.log(e)
         }
@@ -173,10 +204,10 @@ export default function EmployeePerformacePage() {
                         </DropDownGroup>
                     </HeadingWrpr>
                     <BarChartWrpr>
-                        {/* <Bar
-                            options={options}
-                            data={data}
-                        /> */}
+                        <Bar
+                            options={barChartOptions}
+                            data={barChartData}
+                        />
                     </BarChartWrpr>
                 </UpperBarChartWrpr>
                 <UpperBarChartWrpr>
