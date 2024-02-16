@@ -14,6 +14,7 @@ import A2FormsJunior from "../Pages/A2 form page for juniors";
 import AdminPage from "../Pages/Admin Page";
 import PeerAppraisalCPage from "../Pages/Peer Appraisal C Page";
 import EmployeePerformacePage from "../Pages/Employee Performance Page";
+import GeneratedTablePage from "../Pages/Generated Table Page";
 
 const navMenu = [
     {
@@ -102,7 +103,7 @@ const navMenu = [
             fallback={
                 <PageLoader/>
             }>
-                <TestPage/>
+                <GeneratedTablePage/>
             </Suspense>
         )
     },

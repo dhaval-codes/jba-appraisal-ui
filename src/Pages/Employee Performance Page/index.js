@@ -170,7 +170,7 @@ export default function EmployeePerformacePage() {
         if(selectedDownloadDepartmentName !== ('Select Form' && '')){
             if(selectedDownloadDepartmentName !== ('Select Department' && '')){
                 if(selectedDownloadYear !== ('Select Year' && '')){
-                    navigate(`/table-for-download/formName=${selectedDownloadFormName}&department=${selectedDownloadDepartmentName}&year=${selectedDownloadYear}`)
+                    navigate(`/table-for-download?formName=${selectedDownloadFormName}&department=${selectedDownloadDepartmentName}&year=${selectedDownloadYear}`)
                 }
             }
         }
