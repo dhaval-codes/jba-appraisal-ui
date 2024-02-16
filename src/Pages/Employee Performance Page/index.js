@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react'
-import { BarChartWrpr, DropDownGroup, Heading, HeadingWrpr, IndiDropDownWrpr, LeftWrpr, MainWrpr, Options, OptionsWrpr, PageWrpr, RightWrpr, UpperBarChartWrpr, ViewBox} from './index.sc'
+import { BarChartWrpr, Container, DropDownGroup, FormWrpr, Heading, HeadingWrpr, IndiDropDownWrpr, Label, LeftWrpr, MainWrpr, Options, OptionsWrpr, PageWrpr, RightWrpr, Segment, SubmitButton, UpperBarChartWrpr, ViewBox} from './index.sc'
 import ApplicationHeader from '../../Components/Header'
 import { DataGrid } from '@mui/x-data-grid'
 import { columns } from '../../Utils/adminResources'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 // importing chart components
 import {
@@ -16,8 +17,6 @@ import {
 
 import { Bar } from 'react-chartjs-2'
 import { barChartOptions } from '../../Utils/chartOptions'
-
-//importing temp chart options
 
 // registering Chart components
 
@@ -53,6 +52,11 @@ export default function EmployeePerformacePage() {
             }
         ]
     })
+    const [selectedDownloadFormName, setSelectedDownloadFormName] = useState('')
+    const [selectedDownloadDepartmentName, setSelectedDownloadDepartmentName] = useState('')
+    const [selectedDownloadYear, setSelectedDownloadYear] = useState('')
+
+    const navigate = useNavigate();
 
     const getTableData = async () =>{
         const globalRole = window.sessionStorage.getItem('role')
@@ -133,6 +137,45 @@ export default function EmployeePerformacePage() {
         setIsGraphDeptVisible(false)
     };
 
+    const GenerateTableArray = [
+        {
+            label: 'Form Name:',
+            value: selectedDownloadFormName,
+            options: ['Select Form','Appraisal Form A1 and A2', 'Appraisal Form C']
+        },
+        {
+            label: 'Department:',
+            value: selectedDownloadDepartmentName,
+            options: ['Select Department'].concat(departmentOptions),
+        },
+        {
+            label: 'Year:',
+            value: selectedDownloadYear,
+            options: ['Select Year'].concat(yearOptions)
+        }
+    ]
+
+    const handleDropdownChange = (event, index) => {
+        const selectedValue = event.target.value;
+        if(index === 0){
+            setSelectedDownloadFormName(selectedValue)
+        } else if (index === 1){
+            setSelectedDownloadDepartmentName(selectedValue)
+        } else if (index === 2){
+            setSelectedDownloadYear(selectedValue)
+        }
+      };
+
+    const navigateToDataTablePage = () =>{
+        if(selectedDownloadDepartmentName !== ('Select Form' && '')){
+            if(selectedDownloadDepartmentName !== ('Select Department' && '')){
+                if(selectedDownloadYear !== ('Select Year' && '')){
+                    navigate(`/table-for-download/formName=${selectedDownloadFormName}&department=${selectedDownloadDepartmentName}&year=${selectedDownloadYear}`)
+                }
+            }
+        }
+    }
+
     useEffect(()=>{
         getTableData()
         getDepartment()
@@ -211,7 +254,26 @@ export default function EmployeePerformacePage() {
                     </BarChartWrpr>
                 </UpperBarChartWrpr>
                 <UpperBarChartWrpr>
-
+                    <HeadingWrpr>
+                        <Heading>
+                            Generate Data Table
+                        </Heading>
+                    </HeadingWrpr>
+                    <FormWrpr>
+                        {GenerateTableArray.map((item, index)=>(
+                            <Segment>
+                                <Label>{item.label}</Label>
+                                <Container key={index} value={item.value} onChange={(e) => handleDropdownChange(e, index)}>
+                                    {item.options.map((option, index)=>(
+                                        <option key={index}>{option}</option>
+                                    ))}
+                                </Container>
+                            </Segment>
+                        ))}
+                        <SubmitButton onClick={navigateToDataTablePage}>
+                            Generate Data Table
+                        </SubmitButton>
+                    </FormWrpr>
                 </UpperBarChartWrpr>
             </RightWrpr>
         </MainWrpr>

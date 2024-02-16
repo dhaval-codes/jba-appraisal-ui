@@ -95,6 +95,18 @@ const navMenu = [
         roles: ["staff","HOD","Admin"]
     },
     {
+        label: 'Generated Table For Download',
+        path: '/table-for-download',
+        element:(
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <TestPage/>
+            </Suspense>
+        )
+    },
+    {
         label: 'Test Page',
         path: '/TestPage',
         element: (
@@ -105,7 +117,8 @@ const navMenu = [
                 <TestPage/>
             </Suspense>
         )
-    }
+    },
+    
 ]
 
 export default function MyAppRoutes () {

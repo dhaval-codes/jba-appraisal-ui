@@ -133,3 +133,58 @@ export const BarChartWrpr = styled.div`
     justify-content: center;
     border-radius: 0.6125rem;
 `;
+
+export const FormWrpr = styled.form`
+    height: calc(100% - 3rem);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+`;
+
+export const Segment = styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+`;
+
+export const Label = styled.label`
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #000;
+`;
+
+export const Container = styled.select`
+    height: 2rem;
+    width: 100%;
+    padding: 0.25rem;
+    font-size: 1rem;
+    border: 2px solid #312B8B;
+    border-radius: 0.25rem;
+    text-transform: capitalize;
+    &:focus {
+        outline: none;
+        border-color: #312B8B;
+    }
+`;
+
+export const SubmitButton = styled.button`
+    border: none;
+    border-radius: 0.25rem;
+    height: 2.25rem;
+    width: 100%;
+    background-color: #312B8B;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    &:hover{
+        background-color: #fff;
+        border: 1px solid #BCBCBC;
+        color: #312B8B;
+        transition: all ease-in-out 0.5s;
+    }
+`;
