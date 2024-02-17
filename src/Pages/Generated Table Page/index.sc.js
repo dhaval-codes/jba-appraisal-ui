@@ -58,7 +58,6 @@ export const PDFWrpr = styled.div`
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
 `;
 
 export const PDFSegment = styled.div`
@@ -70,6 +69,7 @@ export const PDFSegment = styled.div`
     justify-content: space-between;
     gap: 1rem;
     border: 1px solid black;
+    padding: 1rem;
 `;
 
 export const PDFContWrpr = styled.div`
@@ -95,6 +95,15 @@ export const PDFsubHeading = styled.h2`
 export const GridDataTable = styled.div`
     height: auto;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const GridHeaderCont = styled.div`
+    height: auto;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1rem;
@@ -110,4 +119,18 @@ export const GridHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+
+export const GridBox = styled.div`
+    height: 100%;
+    font-size: 1.5rem;
+    width: 100%;
+    color: #000;
+    font-weight: 400;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border: 1px solid black;
 `;

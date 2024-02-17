@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import { DownloadButtonWrpr, GridDataTable, GridHeader, Image, MainWrpr, PDFContWrpr, PDFSegment, PDFWrpr, PDFsubHeading, PageWrpr, ScrollableComponent, TopWrpr } from './index.sc'
+import { DownloadButtonWrpr, GridBox, GridDataTable, GridHeader, GridHeaderCont, Image, MainWrpr, PDFContWrpr, PDFSegment, PDFWrpr, PDFsubHeading, PageWrpr, ScrollableComponent, TopWrpr } from './index.sc'
 import ApplicationHeader from '../../Components/Header'
 import PDFImage from '../../Assets/Images/SVGs/Pdf.svg'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export default function GeneratedTablePage() {
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -18,17 +21,64 @@ export default function GeneratedTablePage() {
     const year = searchParams.get('year');
 
     const getDownloadPDFdata = async (formName, department, year) => {
+        const role = window.sessionStorage.getItem('role')
         try{
             let response = await axios.post(`${REACT_APP_API_BASE_URL}admin/getDownloadPDFdata`,{
                 formName: formName,
                 department: department,
-                year: year
+                year: year,
+                role: role
             })
             setData(response.data)
         } catch (e) {
             console.log(e)
         }
     }
+  
+    const downloadPDF = async () => {
+        if (formName === 'Appraisal Form A1 and A2') {
+            console.log('chal raha hai');
+            const segments = document.querySelectorAll('.pdf-segment');
+            setLoading(true);
+            console.log(segments)
+    
+            const doc = new jsPDF('p', 'mm', 'a4');
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+    
+            // Create an array to store all html2canvas promises
+            const promises = [];
+    
+            // Iterate over each segment and create a promise for capturing its content
+            for (const segment of segments) {
+                const promise = new Promise((resolve) => {
+                    html2canvas(segment, {
+                        scale: 0.8, // Reduce scale to decrease image resolution and file size
+                        allowTaint: true // Allow capturing cross-origin images
+                    }).then((canvas) => {
+                        const imgData = canvas.toDataURL('image/jpeg', 0.8); // Adjust quality to reduce file size
+                        resolve(imgData); // Resolve the promise with image data
+                    });
+                });
+                promises.push(promise); // Push the promise into the array
+            }
+    
+            // Wait for all promises to resolve and get the image data
+            const imageDataArray = await Promise.all(promises);
+    
+            // Add images to the PDF one by one for each page
+            imageDataArray.forEach((imgData, index) => {
+                if (index > 0) {
+                    doc.addPage();
+                }
+                doc.addImage(imgData, 'JPEG', 0, 0, pageWidth, pageHeight);
+            });
+    
+            setLoading(false);
+            doc.save('download.pdf');
+        }
+    }
+        
 
     useEffect(()=>{
         getDownloadPDFdata(formName,department,year)
@@ -39,16 +89,23 @@ export default function GeneratedTablePage() {
         <ApplicationHeader/>
         <MainWrpr>
             <TopWrpr>
-                <DownloadButtonWrpr>
-                    <Image src={PDFImage}/>
-                    Download PDF
-                </DownloadButtonWrpr>
+                {loading ? (
+                    <DownloadButtonWrpr>
+                        <Image src={PDFImage}/>
+                        Downloading PDF
+                    </DownloadButtonWrpr>
+                ) : (
+                    <DownloadButtonWrpr onClick={downloadPDF}>
+                        <Image src={PDFImage}/>
+                        Download PDF
+                    </DownloadButtonWrpr>
+                )}
             </TopWrpr>
             <ScrollableComponent>
                 {formName === 'Appraisal Form A1 and A2' ? (
-                    <PDFWrpr>
+                    <PDFWrpr className='appraisal-A1-container'>
                         {data.map((item,index)=>(
-                            <PDFSegment key={index}>
+                            <PDFSegment key={index} className='pdf-segment'>
                                 <PDFContWrpr>
                                     <PDFsubHeading>Form Name: <span>{item.name}</span></PDFsubHeading>
                                     <PDFsubHeading>Filled Year: <span>{item.timePeriod.year}</span></PDFsubHeading>
@@ -64,9 +121,18 @@ export default function GeneratedTablePage() {
                                     <PDFsubHeading>Cumalative Avg: <span>{item.cumalativeMarks.toFixed(2)}</span></PDFsubHeading>
                                 </PDFContWrpr>
                                 <GridDataTable>
-                                    <GridHeader>Question</GridHeader>
-                                    <GridHeader>Selected Option</GridHeader>
-                                    <GridHeader>Selected Marks</GridHeader>
+                                    <GridHeaderCont>
+                                        <GridHeader>Question</GridHeader>
+                                        <GridHeader>Selected Option</GridHeader>
+                                        <GridHeader>Selected Marks</GridHeader>
+                                    </GridHeaderCont>
+                                    {item.filledDataMarksArray.map((myItem,myIndex)=>(
+                                        <GridHeaderCont key={myIndex}>
+                                            <GridBox>{myItem.ques}</GridBox>
+                                            <GridBox>{myItem.selectedAns}</GridBox>
+                                            <GridBox>{myItem.selectedNumber}</GridBox>
+                                        </GridHeaderCont>
+                                    ))}
                                 </GridDataTable>
                             </PDFSegment>
                         ))}
