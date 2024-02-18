@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { DownloadButtonWrpr, GridBox, GridDataTable, GridHeader, GridHeaderCont, Image, MainWrpr, PDFContWrpr, PDFSegment, PDFWrpr, PDFsubHeading, PageWrpr, ScrollableComponent, TopWrpr } from './index.sc'
+import { Answers, DownloadButtonWrpr, FormCCont, GridBox, GridDataTable, GridHeader, GridHeaderCont, Image, MainWrpr, PDFContWrpr, PDFSegment, PDFWrpr, PDFsubHeading, PageWrpr, Questions, ScrollableComponent, TextCWrpr, TopWrpr } from './index.sc'
 import ApplicationHeader from '../../Components/Header'
 import PDFImage from '../../Assets/Images/SVGs/Pdf.svg'
 import { useLocation } from 'react-router-dom'
@@ -37,11 +37,9 @@ export default function GeneratedTablePage() {
   
     const downloadPDF = async () => {
         if (formName === 'Appraisal Form A1 and A2') {
-            console.log('chal raha hai');
-            const segments = document.querySelectorAll('.pdf-segment');
+            const segments = document.querySelectorAll('.pdf-segment-A1');
             setLoading(true);
-            console.log(segments)
-    
+   
             const doc = new jsPDF('p', 'mm', 'a4');
             const pageWidth = doc.internal.pageSize.getWidth();
             const pageHeight = doc.internal.pageSize.getHeight();
@@ -57,6 +55,44 @@ export default function GeneratedTablePage() {
                         allowTaint: true // Allow capturing cross-origin images
                     }).then((canvas) => {
                         const imgData = canvas.toDataURL('image/jpeg', 0.8); // Adjust quality to reduce file size
+                        resolve(imgData); // Resolve the promise with image data
+                    });
+                });
+                promises.push(promise); // Push the promise into the array
+            }
+    
+            // Wait for all promises to resolve and get the image data
+            const imageDataArray = await Promise.all(promises);
+    
+            // Add images to the PDF one by one for each page
+            imageDataArray.forEach((imgData, index) => {
+                if (index > 0) {
+                    doc.addPage();
+                }
+                doc.addImage(imgData, 'JPEG', 0, 0, pageWidth, pageHeight);
+            });
+    
+            setLoading(false);
+            doc.save('download.pdf');
+        } else if (formName === 'Appraisal Form C') {
+            const segments = document.querySelectorAll('.pdf-segment-C');
+            setLoading(true);
+
+            const doc = new jsPDF('p', 'mm', 'a4');
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+    
+            // Create an array to store all html2canvas promises
+            const promises = [];
+    
+            // Iterate over each segment and create a promise for capturing its content
+            for (const segment of segments) {
+                const promise = new Promise((resolve) => {
+                    html2canvas(segment, {
+                        scale: 0.8, // Reduce scale to decrease image resolution and file size
+                        allowTaint: true // Allow capturing cross-origin images
+                    }).then((canvas) => {
+                        const imgData = canvas.toDataURL('image/jpeg', 1); // Adjust quality to reduce file size
                         resolve(imgData); // Resolve the promise with image data
                     });
                 });
@@ -105,7 +141,7 @@ export default function GeneratedTablePage() {
                 {formName === 'Appraisal Form A1 and A2' ? (
                     <PDFWrpr className='appraisal-A1-container'>
                         {data.map((item,index)=>(
-                            <PDFSegment key={index} className='pdf-segment'>
+                            <PDFSegment key={index} className='pdf-segment-A1'>
                                 <PDFContWrpr>
                                     <PDFsubHeading>Form Name: <span>{item.name}</span></PDFsubHeading>
                                     <PDFsubHeading>Filled Year: <span>{item.timePeriod.year}</span></PDFsubHeading>
@@ -138,8 +174,32 @@ export default function GeneratedTablePage() {
                         ))}
                     </PDFWrpr>
                 ) : (
-                    <PDFWrpr>
-
+                    <PDFWrpr className='appraisal-C-container'>
+                        {data.map((item,index)=>(
+                            <PDFSegment key={index} className='pdf-segment-C'>
+                                <PDFContWrpr>
+                                    <PDFsubHeading>Form Name: <span>{item.name}</span></PDFsubHeading>
+                                    <PDFsubHeading>Filled Year: <span>{item.timePeriod.year}</span></PDFsubHeading>
+                                    <PDFsubHeading>Department: <span>{item.applicantsDepartment}</span></PDFsubHeading>
+                                </PDFContWrpr>
+                                <PDFContWrpr>
+                                    <PDFsubHeading>Applicant's Name: <span>{item.applicantsName}</span></PDFsubHeading>
+                                    <PDFsubHeading>Filled By: <span>{item.filledBy}</span></PDFsubHeading>
+                                    <PDFsubHeading>Filler's Designation: <span>{item.fillersDesignation}</span></PDFsubHeading>
+                                </PDFContWrpr>
+                                <PDFContWrpr>
+                                    <PDFsubHeading>Apllicant's Staff Code: <span>{item.applicantsStaffCode}</span></PDFsubHeading>
+                                </PDFContWrpr>
+                                <FormCCont>
+                                    {item.filledData.map((meraItem, i)=>(
+                                        <TextCWrpr key={i}>
+                                            <Questions>{`Q: ${Object.keys(meraItem)[0]}`}</Questions>
+                                            <Answers>{`Ans: ${Object.values(meraItem)[0]}`}</Answers>
+                                        </TextCWrpr>
+                                    ))}
+                                </FormCCont>
+                            </PDFSegment>
+                        ))}
                     </PDFWrpr>
                 )}
             </ScrollableComponent>

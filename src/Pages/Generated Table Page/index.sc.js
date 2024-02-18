@@ -123,7 +123,7 @@ export const GridHeader = styled.div`
 
 export const GridBox = styled.div`
     height: 100%;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     width: 100%;
     color: #000;
     font-weight: 400;
@@ -133,4 +133,38 @@ export const GridBox = styled.div`
     justify-content: center;
     padding: 0.25rem;
     border: 1px solid black;
+`;
+
+export const FormCCont = styled.div`
+    height: auto;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+`;
+
+export const TextCWrpr = styled.div`
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 0.25rem;
+`;
+
+export const Questions = styled.h2`
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #000;
+`;
+
+export const Answers = styled.p`
+    font-size: 1rem;
+    margin: 0;
+    align-items: left;
+    font-weight: 400;
+    color: #000;
 `;
