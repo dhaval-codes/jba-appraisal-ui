@@ -15,6 +15,7 @@ import AdminPage from "../Pages/Admin Page";
 import PeerAppraisalCPage from "../Pages/Peer Appraisal C Page";
 import EmployeePerformacePage from "../Pages/Employee Performance Page";
 import GeneratedTablePage from "../Pages/Generated Table Page";
+import StaffManagementPage from "../Pages/Staff Management Page";
 
 const navMenu = [
     {
@@ -104,6 +105,18 @@ const navMenu = [
                 <PageLoader/>
             }>
                 <GeneratedTablePage/>
+            </Suspense>
+        )
+    },
+    {
+        label: 'Staff Management Page',
+        path: '/staff-management',
+        element:(
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <StaffManagementPage/>
             </Suspense>
         )
     },

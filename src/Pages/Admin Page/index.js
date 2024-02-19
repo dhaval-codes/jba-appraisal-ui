@@ -40,7 +40,7 @@ const sideBarMappingOptions = [
     },
     {
         label: 'Staff Management',
-        nav: ''
+        nav: '/staff-management'
     }
 ]
 
