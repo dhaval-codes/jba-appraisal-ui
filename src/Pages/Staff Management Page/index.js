@@ -5,6 +5,7 @@ import CrossIcon from '../../Assets/Images/SVGs/Cross.svg'
 import FormButton from '../../Components/FormButton'
 import AddUserComponent from './adduserComponent'
 import UpdateUserComponent from './updateUserComponent'
+import DeleteUserComponent from './deleteUserComponent'
 
 const buttonMappingArray = [
     {
@@ -38,7 +39,7 @@ export default function StaffManagementPage() {
     const CrossIconFunction = () => {
         setShowDynamicComp(false);
         setSelected('');
-      }
+    }
 
   return (
     <PageWrpr>
@@ -74,7 +75,7 @@ export default function StaffManagementPage() {
                                 <AddUserComponent/>
                             ) : activeHeading === 'Update Eployee Profile' ? (
                                 <UpdateUserComponent/>
-                            ) : (<></>)}
+                            ) : (<DeleteUserComponent/>)}
                         </ContentWrpr>
                     </ContainerWrpr>
                 )}
