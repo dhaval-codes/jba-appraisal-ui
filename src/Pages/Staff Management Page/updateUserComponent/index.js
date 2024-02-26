@@ -17,7 +17,6 @@ export default function UpdateUserComponent() {
     const [selectedDepartment, setSelectedDepartment] = useState('');
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
-
     // Event handler for role selection change
     const handleRoleChange = (event) => {
         setSelectedRole(event.target.value);

@@ -3,6 +3,7 @@ import { FormLabel, FormWrpr, InputBoxOne, MainWrpr, MySegment, SegmentWrprOne, 
 import axios from 'axios';
 import { SuccessWrpr } from '../updateUserComponent/index.sc';
 import TickGif from '../../../Assets/Gifs/check-green.gif'
+import ErrorGif from '../../../Assets/Gifs/erroe.gif'
 
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -11,6 +12,7 @@ export default function DeleteUserComponent() {
     const [mappingArray, setMappingArray] = useState([])
     const [sendingRefrence, setSendingRefrece] = useState()
     const [success, setSuccess] = useState(false)
+    const [faliure, setFaliure] = useState(false)
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
@@ -61,6 +63,12 @@ export default function DeleteUserComponent() {
                     setSuccess(false)
                     window.location.reload()
                 },1650)
+            } else if (update.data === 'No'){
+                setFaliure(true)
+                setTimeout(()=>{
+                    setFaliure(false)
+                    window.location.reload()
+                },1650)
             }
         } catch (e) {
             console.log(e)
@@ -95,6 +103,9 @@ export default function DeleteUserComponent() {
         </div>
         {success && (
             <SuccessWrpr src={TickGif}/>
+        )}
+        {faliure && (
+            <SuccessWrpr src={ErrorGif}/>
         )}
     </MainWrpr>
   )
