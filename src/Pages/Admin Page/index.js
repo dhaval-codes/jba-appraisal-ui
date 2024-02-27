@@ -41,6 +41,10 @@ const sideBarMappingOptions = [
     {
         label: 'Staff Management',
         nav: '/staff-management'
+    },
+    {
+        label: 'Delete Filled Forms',
+        nav: '/delete-filled-forms'
     }
 ]
 

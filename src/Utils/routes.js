@@ -16,6 +16,7 @@ import PeerAppraisalCPage from "../Pages/Peer Appraisal C Page";
 import EmployeePerformacePage from "../Pages/Employee Performance Page";
 import GeneratedTablePage from "../Pages/Generated Table Page";
 import StaffManagementPage from "../Pages/Staff Management Page";
+import DeleteFilledFormPage from "../Pages/Delete Filled Forms Page";
 
 const navMenu = [
     {
@@ -117,6 +118,18 @@ const navMenu = [
                 <PageLoader/>
             }>
                 <StaffManagementPage/>
+            </Suspense>
+        )
+    },
+    {
+        label: 'Staff Management Page',
+        path: '/delete-filled-forms',
+        element:(
+            <Suspense
+            fallback={
+                <PageLoader/>
+            }>
+                <DeleteFilledFormPage/>
             </Suspense>
         )
     },

@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from 'react'
 import ApplicationHeader from '../../Components/Header'
-import { MainContainer, MainView, Facts, Sidebar, FormBtnCont, PageWrpr } from './index.sc'
+import { MainContainer, MainView, Facts, Sidebar, FormBtnCont, PageWrpr, DynamicButton } from './index.sc'
 import FormButton from '../../Components/FormButton'
 import DetailsCont from '../../Components/DetailsComp'
 import DynamicDisplayComp from '../../Components/DynamicDisplayComponent'
 import SpecialButton from '../../Components/Other Appraisal Button'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -20,6 +21,8 @@ export default function LandingPage() {
   const Role = window.sessionStorage.getItem("role");
   const Department = window.sessionStorage.getItem("department")
   const Name = window.sessionStorage.getItem("name")
+
+  const navigate = useNavigate();
 
   const SideBarFormData = async (Role)=>{
     try{
@@ -92,6 +95,7 @@ export default function LandingPage() {
               />))
             }
             {Role === 'teacher' ? (<></>) : <SpecialButton/>} 
+            {Department === 'cs' ? (<DynamicButton onClick={()=> navigate('/delete-filled-forms')}>Delete Filled Form</DynamicButton>): (<></>)}
           </FormBtnCont>
           <DetailsCont/>
         </Sidebar>

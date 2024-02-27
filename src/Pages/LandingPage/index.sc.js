@@ -48,3 +48,27 @@ export const Facts = styled.h3`
     font-size: 1rem;
     font-weight: 600;
 `;
+
+export const DynamicButton = styled.button`
+    height: 3.75rem;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.625rem;
+    border: 3px solid #312B8B;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    margin: 0;
+    &:hover{
+        background: linear-gradient(270deg, #312B8B 0%, #000 100%);
+        border: none;
+        color: #fff;
+    }
+`;
